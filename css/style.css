@@ -277,6 +277,15 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--blue); }
 .ph b { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
 .ph span { font-size: 15px; max-width: 32ch; }
 
+/* product feature card (crews / drivers) */
+.vcard { margin: 0; display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: center; background: var(--cream); border-radius: 28px; padding: 18px 22px 18px 14px; }
+.models__grid + .vcard { margin-top: 16px; }
+.vcard img { width: 100%; aspect-ratio: 1; object-fit: contain; mix-blend-mode: multiply; }
+.vcard__tag { display: inline-block; margin-bottom: 8px; padding: 4px 10px; border-radius: 999px; background: var(--yellow); color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.vcard b { display: block; color: var(--blue); font-size: clamp(19px, 2vw, 24px); font-weight: 800; line-height: 1.15; }
+.vcard p { margin-top: 6px; color: var(--muted); font-size: 16px; }
+@media (min-width: 760px) { .vcard { grid-template-columns: 200px 1fr; gap: 28px; padding: 22px 32px 22px 18px; } }
+
 /* stores: shelf + online shop card */
 .shelf { position: relative; padding: 38px 10px 0; background: linear-gradient(#FFFDF7, #F1EADB); overflow: hidden; }
 .shelf__tag { position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; background: var(--yellow); color: var(--blue); border-radius: 6px; padding: 3px 8px; }

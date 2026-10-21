@@ -65,7 +65,7 @@ window.LUNCHEE_COPY = {
       how: {
         h: 'Plug it in on the way. Lunch is ready when the break starts.',
         kind: 'crews',
-        photo: 'Lunch box on the dashboard / seat of a work van at a roadwork site',
+        visual: { img: 'cables', tag: 'In the box', h: '12V and 24V cables included', p: 'Plug into the pickup, the van or the truck – and the 230V cable for the site cabin.' },
         timeline: [['07:30', 'Plug in on the way to site'], ['11:40', 'It heats while you work'], ['12:00', 'Break. Lunch is hot.']],
         p: 'Each worker brings food from home in their own box. Mix colours so everyone knows which one is theirs.',
         names: ['Jón', 'Sigga', 'Kári', 'Anna']
@@ -106,7 +106,7 @@ window.LUNCHEE_COPY = {
           ['truck', 'Long-haul truck', 'Reykjavík to Akureyri with a hot meal on the way.'],
           ['taxi', 'Taxi', 'Eat between rides, not at the gas station.']
         ],
-        photo: 'Lunch box plugged in inside a bus or truck cab'
+        visual: { img: 'bag', tag: 'In the box', h: 'Thermal bag included', p: 'Keeps lunch warm between stops – with room for a drink or fruit.' }
       },
       faq: [
         ['Does it work on 24V?', 'Yes, the 24V cable is in the box.'],
@@ -298,7 +298,7 @@ window.LUNCHEE_COPY = {
       how: {
         h: 'Podłącz po drodze. Lunch jest gotowy, kiedy zaczyna się przerwa.',
         kind: 'crews',
-        photo: 'Lunchbox na desce rozdzielczej / siedzeniu busa przy robotach drogowych',
+        visual: { img: 'cables', tag: 'W zestawie', h: 'Kable 12V i 24V w komplecie', p: 'Podłączasz w pickupie, busie albo ciężarówce – a kablem 230V w kontenerze na budowie.' },
         timeline: [['07:30', 'Podłączasz po drodze na budowę'], ['11:40', 'Grzeje się, kiedy pracujesz'], ['12:00', 'Przerwa. Lunch jest ciepły.']],
         p: 'Każdy przynosi jedzenie z domu we własnym lunchboxie. Weźcie różne kolory, żeby każdy wiedział, który jest jego.',
         names: ['Jón', 'Sigga', 'Kári', 'Anna']
@@ -339,7 +339,7 @@ window.LUNCHEE_COPY = {
           ['truck', 'Ciężarówka w trasie', 'Z Reykjavíku do Akureyri z ciepłym posiłkiem po drodze.'],
           ['taxi', 'Taksówka', 'Jesz między kursami, a nie na stacji benzynowej.']
         ],
-        photo: 'Lunchbox podłączony w kabinie autobusu lub ciężarówki'
+        visual: { img: 'bag', tag: 'W zestawie', h: 'Torba termiczna w komplecie', p: 'Trzyma ciepło między przystankami – z miejscem na napój albo owoc.' }
       },
       faq: [
         ['Czy działa na 24V?', 'Tak, kabel 24V jest w zestawie.'],

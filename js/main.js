@@ -33,6 +33,7 @@
   const icon = (n, cls = 'ico') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[n] || ''}</svg>`;
 
   const COLOURS = [['pearl', 'Pearl'], ['nature', 'Nature'], ['city', 'City'], ['glamour', 'Glamour']];
+  const visualCard = (v) => `<figure class="vcard reveal"><img src="assets/img/${v.img}.jpg" alt="" width="900" height="900" loading="lazy"><figcaption><span class="vcard__tag">${v.tag}</span><b>${v.h}</b><p>${v.p}</p></figcaption></figure>`;
   const placeholder = (label, ui) => `<figure class="ph" role="img" aria-label="${ui.placeholder}: ${label}">${icon('camera')}<b>${ui.placeholder}</b><span>${label}</span></figure>`;
 
   // Scroll reveal. After a tile/language swap the new content shows at once (the person is already looking at it).
@@ -113,12 +114,12 @@
           <p>${h.p}</p>
           <ul class="names" aria-hidden="true">${COLOURS.map(([f], i) => `<li><img src="assets/img/${f}.jpg" alt="" width="900" height="900" loading="lazy"><span>${h.names[i]}</span></li>`).join('')}</ul>
         </article>
-        ${placeholder(h.photo, u)}
+        ${visualCard(h.visual)}
       </div>`;
     } else if (h.kind === 'drivers') {
       body = `<div class="models__grid models__grid--3">${h.cards.map(([ic, ttl, p]) => `
         <article class="model-card reveal">${icon(ic)}<h3>${ttl}</h3><p>${p}</p></article>`).join('')}</div>
-        ${placeholder(h.photo, u)}`;
+        ${visualCard(h.visual)}`;
     } else if (h.kind === 'stores') {
       body = `<div class="models__grid">
         <article class="model-card reveal"><h3>${h.shelf}</h3>
@@ -223,7 +224,7 @@
     $$('.tile').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.aud === aud)));
     // Unlisted audiences: no tile on the page, but their direct link (e.g. /stores) still works
     $$('.tile[data-unlisted]').forEach((el) => { el.hidden = el.dataset.aud !== aud; });
-    document.title = `${c.title} – ${u.tagline}`;
+    document.title = `${c.title} | Lunchee.is`;
     document.documentElement.dataset.aud = aud;
     watchReveals();
   };

@@ -12,7 +12,8 @@
   An older stores-Christmas variant lives on branch `xmas-campaign` in the `noveen-lp` repo.
 - Comtel (Szymon) gave written OK for the Lunchee name and lunchee.is. Natalia is buying lunchee.is → DNS steps in `DNS.md`.
   Don't set the custom domain in Pages settings before DNS is ready (github.io would redirect to a domain that doesn't work yet).
-- `noindex` stays in `<head>` until the domain launch. Remove it on launch day.
+- `noindex` stays in `<head>` (index + 5 audience pages) until the domain launch. Remove it on launch day.
+- Link previews (og:image etc.) use absolute https://lunchee.is/ URLs on purpose – they start working once the domain is live. Images: assets/img/og-default.jpg, og-companies.jpg (generated with PIL; regenerate if the hero/campaign copy changes).
 - Email plan: info@lunchee.is (+ mikolaj@), Google Workspace recommended. Then switch footer + FormSubmit action to info@.
 - Stores tile is hidden (unlisted) since 22.10.2026 – the /stores link still works for sending to a specific dealer (e.g. Gunnar / Hafís).
 - Open: footer/form contact details, spoon+fork vs spoon in box contents, "offer within days" wording, photos for crews/drivers placeholders.
