@@ -1,6 +1,7 @@
 # Notes for Claude – Lunchee Iceland LP
 
 - **Timing: Mikołaj is in Iceland until 23 December 2026, then away ~2.5 months (back ~mid-March 2027).** All meetings, presentations and closing in person must happen by 23.12. Plan around that; anything after must run without him on site.
+- Decisions 22.10.2026: first order = a full pallet (192 pcs), ordered as soon as Mikołaj's compensation money arrives; then the ehf. company is opened (500k ISK share capital = own contribution into stock). Local on-site person Jan–Mar: his friend Adrian (contact still goes through Mikołaj). Company prices: Mikołaj sends them (pending).
 - The user (Mikołaj) is not a developer: always reply in Polish, simply, no jargon. After every change: commit + push to `main`, wait for the Pages deploy, check the live URL.
 - Brand: "Lunchee – kierunek wizualny marki" (~/Desktop/Lunchee/#2 Set materiałów/Lunchee Kierunek Wizualny - Kamil.psb).
   Yellow #F2B90C, blue #0054A6, optional #F26A3D / #7693DF / #BCDD3F. Font Coolvetica (files not yet supplied → Inter Tight), numbers Outfit.
