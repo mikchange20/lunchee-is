@@ -221,6 +221,8 @@
 
     $$('[data-cta]').forEach((a) => { a.textContent = c.cta; });
     $$('.tile').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.aud === aud)));
+    // Unlisted audiences: no tile on the page, but their direct link (e.g. /stores) still works
+    $$('.tile[data-unlisted]').forEach((el) => { el.hidden = el.dataset.aud !== aud; });
     document.title = `${c.title} – ${u.tagline}`;
     document.documentElement.dataset.aud = aud;
     watchReveals();
