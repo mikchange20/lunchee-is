@@ -185,6 +185,32 @@
     return m ? `<span class="tt-blue">${m[1]}</span> <span class="tt-white">${m[2]}</span>` : `<span class="tt-blue">${txt}</span>`;
   };
 
+  // Big see-through line drawings on the right of the coloured "why" band, one per audience (white, like a reflection)
+  const flake = (x, y, r = 12) => `<path d="M${x - r} ${y}h${2 * r}M${x} ${y - r}v${2 * r}M${x - r * .7} ${y - r * .7}l${r * 1.4} ${r * 1.4}M${x + r * .7} ${y - r * .7}l${-r * 1.4} ${r * 1.4}"/>`;
+  const ART = {
+    rentals: `<rect class="f" x="200" y="10" width="140" height="122" rx="16"/>
+      <rect x="218" y="34" width="16" height="16" rx="4"/><path d="m221 42 4 4 7-8M246 42h76"/>
+      <rect x="218" y="64" width="16" height="16" rx="4"/><path d="m221 72 4 4 7-8M246 72h60"/>
+      <rect class="f2" x="218" y="94" width="16" height="16" rx="4"/><path class="b" d="m221 102 4 4 7-8M246 102h70"/>
+      <path class="f" d="M24 222v-30q0-10 10-12l32-6 30-32q8-8 20-8h74q12 0 20 8l30 32 28 4q12 2 12 14v32z"/>
+      <path d="M100 172l22-24q4-4 10-4h28v28zM172 144h20q6 0 10 4l22 24h-52z"/>
+      <circle class="f" cx="80" cy="224" r="22"/><circle cx="80" cy="224" r="8"/><circle class="f" cx="226" cy="224" r="22"/><circle cx="226" cy="224" r="8"/>`,
+    crews: `<path class="f" d="M40 178q0-74 74-74t74 74z"/><path class="f" d="M22 178h184q0 16-16 16H38q-16 0-16-16z"/><path d="M98 106v44M130 106v44"/>
+      <path class="f" d="M276 56l-42 178h84z"/><path d="M262 112h28M249 168h54M218 234h116"/>
+      <circle class="f" cx="150" cy="40" r="26"/><path d="M150 26v14l10 8"/>`,
+    drivers: `<rect class="f" x="36" y="36" width="156" height="184" rx="24"/><rect x="56" y="58" width="116" height="84" rx="12"/>
+      <circle cx="72" cy="186" r="11"/><circle cx="156" cy="186" r="11"/><path d="M98 186h32M36 82H20v34M192 82h16v34M64 220v22M164 220v22"/>
+      <path d="M232 250 288 30M352 250 312 30"/><path class="b" d="M292 238v-26M295 186v-20M298 140v-16M300 102v-12M302 70v-9"/>`,
+    companies: `<rect class="f" x="62" y="112" width="180" height="130" rx="12"/><rect class="f" x="48" y="80" width="208" height="38" rx="10"/>
+      <path class="b" d="M152 80v162"/><path class="f" d="M152 80c-20-42-74-42-64-10 6 18 42 12 64 10 22 2 58 8 64-10 10-32-44-32-64 10z"/>
+      ${flake(304, 56, 16)}${flake(322, 176, 11)}${flake(24, 40, 10)}${flake(280, 236, 8)}`,
+    diet: `<path class="f" d="M64 246q24-92 46-140 20-12 36 12-30 56-82 128z"/><path d="M128 104q-8-32 6-50M134 108q12-28 36-32M140 112q24-10 42 2M96 170l14 6M84 204l12 5"/>
+      <circle class="f" cx="212" cy="168" r="26"/><circle class="f" cx="248" cy="146" r="30"/><circle class="f" cx="282" cy="172" r="24"/><path d="M232 250q4-32-8-60M260 250q-2-32 12-56M228 250h36"/>
+      <circle class="f" cx="186" cy="64" r="30"/><path d="M174 38l12 8 12-8M186 46V32"/>
+      <path class="f" d="M284 36c42 0 60 20 60 62-42 0-60-20-60-62z"/><path d="M284 36l46 46"/>`
+  };
+  const artSvg = (a) => ART[a] ? `<div class="why__art" aria-hidden="true"><svg viewBox="0 0 360 260">${ART[a]}</svg></div>` : '';
+
   const renderField = (f) => {
     if (f.type === 'choice') {
       const type = f.multiple ? 'checkbox' : 'radio';
@@ -199,7 +225,7 @@
     const u = ui();
     const tile = $(`.tile[data-aud="${aud}"] b`);
 
-    $('[data-dyn="why"]').innerHTML = `
+    $('[data-dyn="why"]').innerHTML = `${artSvg(aud)}
       <div class="why__head reveal">${audPill('pill--on-color')}<h2>${twoTone(c.why.h)}</h2><p class="lead">${c.why.lead}</p></div>
       <ul class="why__list">${c.why.items.map(([ic, h, p]) => `<li class="reveal">${icon(ic)}<h3>${h}</h3><p>${p}</p></li>`).join('')}</ul>`;
     $('[data-dyn="how"]').innerHTML = renderHow(c.how, u);
