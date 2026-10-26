@@ -223,36 +223,41 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--blue); }
 .who__hint svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--blue); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; animation: hint-bob 1.8s ease-in-out infinite; }
 @keyframes hint-bob { 50% { transform: translateY(4px); } }
 
-/* industry tabs – the chosen tab is the same colour as the section below and joins it like a folder tab */
-.tiles { margin-top: 22px; display: flex; align-items: flex-end; gap: 4px; }
+/* industry cards – separate, equal cards; the chosen one is filled with the industry colour and gets a tick */
+.who { padding-bottom: clamp(36px, 5vw, 56px); }
+.tiles { margin-top: 22px; display: flex; align-items: stretch; gap: 6px; }
 .tile {
   position: relative; flex: 1 1 0; min-width: 0;
-  display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center;
-  padding: 12px 3px 12px; border: 2px solid var(--line); border-bottom: 0; border-radius: 18px 18px 0 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-align: center;
+  padding: 12px 3px; border: 1.5px solid var(--line); border-radius: 16px;
   background: var(--white); text-decoration: none; cursor: pointer;
-  transition: transform .3s var(--ease), background .25s, border-color .25s, padding .25s;
+  transition: transform .25s var(--ease), background .25s, border-color .25s, box-shadow .25s;
 }
 .tile .ico { width: 28px; height: 28px; margin-bottom: 2px; }
 .tile b, .tile > span { display: none; }
 .tile__short { display: block; font-style: normal; font-weight: 800; font-size: 11.5px; line-height: 1.15; color: var(--blue); letter-spacing: -.01em; }
-.tile:hover { transform: translateY(-3px); border-color: var(--yellow); }
-.tile[aria-pressed="true"] { background: var(--aud); border-color: transparent; padding-bottom: 20px; transform: none; cursor: default; }
+.tile:hover { transform: translateY(-3px); border-color: var(--blue); box-shadow: var(--shadow); }
+.tile[aria-pressed="true"] { background: var(--aud); border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue), var(--shadow); transform: none; cursor: default; }
+.tile[aria-pressed="true"]::after {
+  content: ""; position: absolute; top: -8px; left: -8px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat;
+  box-shadow: 0 0 0 2px var(--white);
+}
 .tile[aria-pressed="true"] .ico { stroke: var(--blue); }
 .tile[aria-pressed="true"] .tile__short { color: var(--blue); }
 .tile[hidden] { display: none; }
-/* on the darker industry colours (coral, sky) the chosen tab uses white text */
+/* on the darker industry colours (coral, sky) the chosen card uses white text */
 html[data-aud="drivers"] .tile[aria-pressed="true"] .tile__short,
 html[data-aud="drivers"] .tile[aria-pressed="true"] b,
 html[data-aud="drivers"] .tile[aria-pressed="true"] > span { color: var(--white); }
 html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white); }
 @media (min-width: 760px) {
-  .tiles { gap: 10px; }
-  .tile { align-items: flex-start; text-align: left; padding: 18px 18px 18px; border-radius: 22px 22px 0 0; }
+  .tiles { gap: 14px; }
+  .tile { align-items: flex-start; justify-content: flex-start; text-align: left; padding: 20px 18px; border-radius: 22px; }
   .tile .ico { width: 34px; height: 34px; margin-bottom: 6px; }
   .tile b { display: block; font-size: 19px; font-weight: 800; line-height: 1.15; color: var(--blue); }
   .tile > span { display: block; font-size: 14px; line-height: 1.35; color: var(--muted); }
   .tile__short { display: none; }
-  .tile[aria-pressed="true"] { padding-bottom: 30px; }
   .tile[aria-pressed="true"] > span { color: var(--ink); }
 }
 
