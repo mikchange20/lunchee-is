@@ -11,8 +11,7 @@
 - Industry switch UX (after Natalia's feedback 26.10.2026): tiles are folder-style tabs joined to the section below (chosen tab = section colour), hint line above them, '● Industry · change' label on every section that changes, and a header menu 'Use cases' with the industries (burger menu on phones). Colours: rentals yellow, crews lime, drivers sky, companies yellow→coral gift.
 - Companies version = Christmas campaign (gift tile that unwraps, snow, snowflake cursor, countdown to 1 December).
   An older stores-Christmas variant lives on branch `xmas-campaign` in the `noveen-lp` repo.
-- Comtel (Szymon) gave written OK for the Lunchee name and lunchee.is. Natalia is buying lunchee.is → DNS steps in `DNS.md`.
-  Don't set the custom domain in Pages settings before DNS is ready (github.io would redirect to a domain that doesn't work yet).
+- Comtel (Szymon) gave written OK for the Lunchee name and lunchee.is. lunchee.is is hosted on Natalia's SEOHOST server (27.10.2026); pushes to main upload there via GitHub Actions FTPS (see DNS.md). Never ask the user to paste FTP passwords into chat – they go only into GitHub Secrets. Do NOT set a custom domain in GitHub Pages settings (the domain points to SEOHOST, not GitHub).
 - `noindex` stays in `<head>` (index + 5 audience pages) until the domain launch. Remove it on launch day.
 - Link previews (og:image etc.) use absolute https://lunchee.is/ URLs on purpose – they start working once the domain is live. Images: assets/img/og-default.jpg, og-companies.jpg (generated with PIL; regenerate if the hero/campaign copy changes).
 - Email plan: info@lunchee.is (+ mikolaj@), Google Workspace recommended. Then switch footer + FormSubmit action to info@.
