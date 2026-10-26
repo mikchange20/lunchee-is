@@ -14,7 +14,10 @@ Plain HTML/CSS/JS – nothing to install. Published with GitHub Pages; every pus
 | Work crews | `/crews` |
 | Drivers & fleets | `/drivers` |
 | Companies – employee gifts (Christmas campaign) | `/companies` |
+| Healthy eating / diet (individuals, B2C) | `/diet` |
 | Stores | `/stores` |
+
+Until 1 December (Christmas campaign) the page opens on `/companies`, its tab is first, and the other versions show a gift bar at the top; from 2 December this switches off by itself (`XMAS_ON` in `js/main.js`).
 
 Add `?lang=pl` for Polish. The form sends a hidden `segment` field.
 

@@ -1,6 +1,6 @@
 (() => {
   const COPY = window.LUNCHEE_COPY;
-  const AUDS = ['rentals', 'crews', 'drivers', 'companies', 'stores'];
+  const AUDS = ['rentals', 'crews', 'drivers', 'companies', 'diet', 'stores'];
   const LANGS = ['en', 'pl', 'is'];
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -28,6 +28,8 @@
     taxi: '<path d="M3 17v-4l2-5h14l2 5v4z"/><path d="M3 13h18M9 8l.5-3h5l.5 3"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/>',
     camera: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
     tree: '<path d="M12 3 7 9h3l-4 5h4l-5 6h14l-5-6h4l-4-5h3z"/><path d="M12 20v2"/>',
+    leaf: '<path d="M5 20c0-9 6-15 15-15 0 9-6 15-15 15z"/><path d="M5 20 14 11"/>',
+    dumbbell: '<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>',
     flake: '<path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7"/><path d="m9 4 3 2 3-2M9 20l3-2 3 2M4 10.5l3.5-.5L6 7M18 14l-1.5 3 3.5-.5M4 13.5l3.5.5L6 17M18 10l-1.5-3 3.5.5"/>'
   };
   const icon = (n, cls = 'ico') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[n] || ''}</svg>`;
@@ -95,8 +97,13 @@
     setTimeout(() => $('.form [name="name"]').focus({ preventScroll: true }), 600);
   };
 
+  // Christmas campaign runs until the last order day (1 December): companies tab goes first and is the default,
+  // the other versions show a gift bar. From 2 December the page goes back to rentals first.
+  const daysToOrder = () => Math.ceil((new Date(new Date().getFullYear(), 11, 1, 23, 59) - new Date()) / 864e5);
+  const XMAS_ON = daysToOrder() > 0 && daysToOrder() <= 70;
+
   let lang = 'en';
-  let aud = 'rentals';
+  let aud = XMAS_ON ? 'companies' : 'rentals';
   const t = () => {
     if (!COPY.en[aud]) aud = 'rentals'; // never break the page if an audience has no copy (e.g. stale cached script)
     return Object.assign({}, COPY.en[aud], (COPY[lang] || {})[aud]);
@@ -121,7 +128,7 @@
         </article>
         ${visualCard(h.visual)}
       </div>`;
-    } else if (h.kind === 'drivers') {
+    } else if (h.kind === 'drivers' || h.kind === 'diet') {
       body = `<div class="models__grid models__grid--3">${h.cards.map(([ic, ttl, p]) => `
         <article class="model-card reveal">${icon(ic)}<h3>${ttl}</h3><p>${p}</p></article>`).join('')}</div>
         ${visualCard(h.visual)}`;
@@ -148,7 +155,6 @@
   };
 
   // Christmas campaign for companies – countdown to the last order day with delivery before Christmas (1 December)
-  const daysToOrder = () => Math.ceil((new Date(new Date().getFullYear(), 11, 1, 23, 59) - new Date()) / 864e5);
   const renderXmas = (x) => `
     <div class="xmas__inner">
       <div class="xmas__head reveal">
@@ -212,6 +218,10 @@
       tg.addEventListener('click', () => { snow.toggle(); syncToggle(); });
     }
     snow.enable(!!x);
+    const bar = $('[data-xbar]');
+    bar.hidden = !XMAS_ON || aud === 'companies';
+    $('[data-xbar-text]').textContent = u.xbar;
+    $('[data-xbar-link]').textContent = u.xbarLink;
     $('[data-dyn="faq"]').innerHTML = `<div class="faq__head reveal">${audPill()}<h2>${u.faq}</h2></div>
       <div class="faq__list reveal">${c.faq.map(([q, a]) => `<details class="qa"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
     $('[data-dyn="cta"]').innerHTML = `${audPill('pill--on-dark')}<h2>${c.form.h}</h2><p>${c.form.lead}</p>`;
@@ -286,7 +296,12 @@
     }
     if (scroll) scrollToTabs();
   };
+  if (XMAS_ON) {
+    $('#tabs').prepend($('.tile[data-aud="companies"]'));
+    $('#menu-uses').prepend($('[data-go-aud="companies"]').closest('li'));
+  }
   $$('.tile').forEach((el) => el.addEventListener('click', (e) => { e.preventDefault(); select(el.dataset.aud); }));
+  $('[data-xbar]').addEventListener('click', (e) => { e.preventDefault(); select('companies', { scroll: true }); });
   document.addEventListener('click', (e) => {
     const ch = e.target instanceof Element && e.target.closest('[data-change]');
     if (ch) { e.preventDefault(); scrollToTabs(); }

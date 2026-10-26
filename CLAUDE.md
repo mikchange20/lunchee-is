@@ -15,5 +15,6 @@
 - `noindex` stays in `<head>` (index + 5 audience pages) until the domain launch. Remove it on launch day.
 - Link previews (og:image etc.) use absolute https://lunchee.is/ URLs on purpose – they start working once the domain is live. Images: assets/img/og-default.jpg, og-companies.jpg (generated with PIL; regenerate if the hero/campaign copy changes).
 - Email plan: info@lunchee.is (+ mikolaj@), Google Workspace recommended. Then switch footer + FormSubmit action to info@.
+- 26.10.2026: Christmas push – until 1 Dec the companies tab is first + default, other versions show a coral gift bar (auto-off from 2 Dec). New 'Healthy eating' tab (`/diet`, mint colour) for individuals who eat healthy (B2C: form asks how many + colour, 'Ask about price'; no prices on the page).
 - Stores tile is hidden (unlisted) since 22.10.2026 – the /stores link still works for sending to a specific dealer (e.g. Gunnar / Hafís).
 - Open: footer/form contact details, spoon+fork vs spoon in box contents, "offer within days" wording, photos for crews/drivers placeholders.

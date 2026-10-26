@@ -15,6 +15,7 @@
   --sky: #7693DF;         /* optional backgrounds */
   --coral: #F26A3D;
   --lime: #BCDD3F;
+  --mint: #A6D7A8;        /* healthy eating tab */
   --cream: #FBF6EA;       /* packaging panel */
   --ink: #12233F;
   --muted: #4E5B70;
@@ -37,6 +38,7 @@
 html[data-aud="crews"] { --aud: var(--lime); }
 html[data-aud="drivers"] { --aud: var(--sky); }
 html[data-aud="stores"] { --aud: var(--lime); }
+html[data-aud="diet"] { --aud: var(--mint); }
 html[data-aud="companies"] { --aud: linear-gradient(135deg, var(--yellow) 0%, var(--coral) 100%); }
 @media (min-width: 720px) { :root { --gutter: clamp(24px, 4vw, 56px); } }
 
@@ -222,17 +224,17 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--blue); }
 @keyframes hint-bob { 50% { transform: translateY(4px); } }
 
 /* industry tabs – the chosen tab is the same colour as the section below and joins it like a folder tab */
-.tiles { margin-top: 22px; display: flex; align-items: flex-end; gap: 6px; }
+.tiles { margin-top: 22px; display: flex; align-items: flex-end; gap: 4px; }
 .tile {
   position: relative; flex: 1 1 0; min-width: 0;
   display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center;
-  padding: 12px 6px 12px; border: 2px solid var(--line); border-bottom: 0; border-radius: 18px 18px 0 0;
+  padding: 12px 3px 12px; border: 2px solid var(--line); border-bottom: 0; border-radius: 18px 18px 0 0;
   background: var(--white); text-decoration: none; cursor: pointer;
   transition: transform .3s var(--ease), background .25s, border-color .25s, padding .25s;
 }
 .tile .ico { width: 28px; height: 28px; margin-bottom: 2px; }
 .tile b, .tile > span { display: none; }
-.tile__short { display: block; font-style: normal; font-weight: 800; font-size: 13px; line-height: 1.15; color: var(--blue); }
+.tile__short { display: block; font-style: normal; font-weight: 800; font-size: 11.5px; line-height: 1.15; color: var(--blue); letter-spacing: -.01em; }
 .tile:hover { transform: translateY(-3px); border-color: var(--yellow); }
 .tile[aria-pressed="true"] { background: var(--aud); border-color: transparent; padding-bottom: 20px; transform: none; cursor: default; }
 .tile[aria-pressed="true"] .ico { stroke: var(--blue); }
@@ -616,3 +618,11 @@ html[data-aud="companies"] .glow { --glow: rgba(255, 255, 255, .5); --glow-2: rg
   .nav .btn--small { max-width: 112px; padding: 4px 10px; font-size: 11.5px; }
   .lang button { padding: 6px 7px; font-size: 11.5px; }
 }
+
+/* Christmas gift bar – shown on the other versions until 1 December, opens the companies (gift) version */
+.xbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; padding: 10px var(--gutter); background: linear-gradient(135deg, var(--coral) 0%, #D9442A 100%); color: var(--white); font-size: 14px; line-height: 1.35; text-align: center; text-decoration: none; }
+.xbar[hidden] { display: none; }
+.xbar .ico { width: 20px; height: 20px; stroke: var(--white); flex: none; }
+.xbar b { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.xbar:hover b { text-decoration-thickness: 2px; }
+@media (min-width: 760px) { .xbar { font-size: 15px; } }

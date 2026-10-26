@@ -10,7 +10,9 @@ window.LUNCHEE_COPY = {
       placeholder: 'Photo coming soon',
       faq: 'Questions you probably have.',
       change: 'change',
-      tagline: 'a hot meal anywhere you drive'
+      tagline: 'a hot meal anywhere you drive',
+      xbar: 'Christmas gift for your team? Order by 1 December – delivered before Christmas.',
+      xbarLink: 'See the gift offer'
     },
     rentals: {
       title: 'Lunchee for car rentals in Iceland',
@@ -195,6 +197,46 @@ window.LUNCHEE_COPY = {
       }
     },
 
+    diet: {
+      title: 'Lunchee for healthy eating in Iceland',
+      cta: 'Ask about price',
+      why: {
+        h: 'Your diet doesn’t take a day off. | Neither does your hot lunch.',
+        lead: 'You plan your meals, cook and portion them – and then the day ends with a hot dog at the gas station. Lunchee keeps your own food hot at work, on the road and after training.',
+        items: [
+          ['leaf', 'Your food, your portions.', 'You decide what’s on the plate and how much. No guessing what’s in the takeaway.'],
+          ['box', 'Meal prep, served hot.', 'Cook on Sunday, eat a hot meal all week. 1.1 L steel container plus a 0.5 L one for a salad or snack.'],
+          ['wallet', 'Cheaper than eating out.', 'Healthy food on the go costs a fortune in Iceland. Bring your own.']
+        ]
+      },
+      how: {
+        h: 'Wherever your day goes, your meal goes too.',
+        kind: 'diet',
+        cards: [
+          ['clock', 'At work', 'Lunch from home, warm at the desk – no queue for the microwave, no takeaway.'],
+          ['plug', 'On the road', 'Plugs into the car socket – a proper meal instead of station food.'],
+          ['dumbbell', 'After training', 'Plug it in before the workout – your meal is hot when you’re done.']
+        ],
+        visual: { img: 'inox', tag: 'In the box', h: 'Heated in steel, not plastic', p: 'Your food sits in a removable 1.1 L stainless steel container. Dishwasher safe.' }
+      },
+      faq: [
+        ['What touches my food?', 'A removable stainless steel (INOX) container. The materials are BPA-free.'],
+        ['How much food fits?', '1.1 L in the main container, plus a 0.5 L container with a lid for a salad or snack.'],
+        ['Does it work at home and in the office?', 'Yes – the 230V cable is in the box, next to the 12V/24V car cable.'],
+        ['How long does it take?', 'About 20 minutes; food from the fridge on a cold day needs a bit longer.']
+      ],
+      form: {
+        h: 'Keep your diet <span class="accent">hot.</span>',
+        lead: 'Tell us how many you need and which colour – we’ll get back to you with the price.',
+        button: 'Ask about price',
+        companyLabel: 'Company (optional)',
+        fields: [
+          { name: 'units', label: 'How many?', type: 'number', placeholder: 'e.g. 1' },
+          { name: 'colour', label: 'Colour', type: 'choice', multiple: true, options: ['Pearl', 'Nature', 'City', 'Glamour'] }
+        ]
+      }
+    },
+
     stores: {
       title: 'Lunchee for stores in Iceland',
       cta: 'Become a reseller',
@@ -244,7 +286,9 @@ window.LUNCHEE_COPY = {
       placeholder: 'Zdjęcie wkrótce',
       faq: 'Pytania, które pewnie masz.',
       change: 'zmień',
-      tagline: 'ciepły posiłek, gdziekolwiek jedziesz'
+      tagline: 'ciepły posiłek, gdziekolwiek jedziesz',
+      xbar: 'Prezent świąteczny dla zespołu? Zamów do 1 grudnia – dostarczymy przed świętami.',
+      xbarLink: 'Zobacz ofertę'
     },
     rentals: {
       title: 'Lunchee dla wypożyczalni samochodów na Islandii',
@@ -429,6 +473,46 @@ window.LUNCHEE_COPY = {
       }
     },
 
+    diet: {
+      title: 'Lunchee dla osób na diecie na Islandii',
+      cta: 'Zapytaj o cenę',
+      why: {
+        h: 'Twoja dieta nie ma dnia wolnego. | Twój ciepły lunch też nie.',
+        lead: 'Planujesz posiłki, gotujesz, ważysz porcje – a dzień i tak kończy się hot dogiem na stacji. Lunchee trzyma Twoje jedzenie na ciepło w pracy, w trasie i po treningu.',
+        items: [
+          ['leaf', 'Twoje jedzenie, Twoje porcje.', 'Ty decydujesz, co jest na talerzu i ile. Bez zgadywania, co jest w jedzeniu na wynos.'],
+          ['box', 'Meal prep na ciepło.', 'Gotujesz w niedzielę, jesz ciepły posiłek cały tydzień. Stalowy pojemnik 1,1 l plus 0,5 l na sałatkę albo przekąskę.'],
+          ['wallet', 'Taniej niż na mieście.', 'Zdrowe jedzenie na wynos kosztuje na Islandii majątek. Weź swoje.']
+        ]
+      },
+      how: {
+        h: 'Gdziekolwiek idziesz, Twój posiłek idzie z Tobą.',
+        kind: 'diet',
+        cards: [
+          ['clock', 'W pracy', 'Lunch z domu, ciepły przy biurku – bez kolejki do mikrofalówki i bez jedzenia na wynos.'],
+          ['plug', 'W trasie', 'Podłączasz do gniazda w aucie – porządny posiłek zamiast jedzenia ze stacji.'],
+          ['dumbbell', 'Po treningu', 'Podłącz przed treningiem – posiłek jest ciepły, kiedy kończysz.']
+        ],
+        visual: { img: 'inox', tag: 'W zestawie', h: 'Grzeje w stali, nie w plastiku', p: 'Jedzenie jest w wyjmowanym stalowym pojemniku 1,1 l. Można myć w zmywarce.' }
+      },
+      faq: [
+        ['Z czym styka się jedzenie?', 'Z wyjmowanym pojemnikiem ze stali nierdzewnej (INOX). Materiały są wolne od BPA.'],
+        ['Ile jedzenia się mieści?', '1,1 l w głównym pojemniku plus pojemnik 0,5 l z pokrywką na sałatkę albo przekąskę.'],
+        ['Działa w domu i w biurze?', 'Tak – kabel 230V jest w zestawie, obok kabla samochodowego 12V/24V.'],
+        ['Ile to trwa?', 'Około 20 minut; jedzenie z lodówki w zimny dzień potrzebuje trochę dłużej.']
+      ],
+      form: {
+        h: 'Twoja dieta, <span class="accent">na ciepło.</span>',
+        lead: 'Napisz, ile sztuk potrzebujesz i w jakim kolorze – odezwiemy się z ceną.',
+        button: 'Zapytaj o cenę',
+        companyLabel: 'Firma (opcjonalnie)',
+        fields: [
+          { name: 'units', label: 'Ile sztuk?', type: 'number', placeholder: 'np. 1' },
+          { name: 'colour', label: 'Kolor', type: 'choice', multiple: true, options: ['Pearl', 'Nature', 'City', 'Glamour'] }
+        ]
+      }
+    },
+
     stores: {
       title: 'Lunchee dla sklepów na Islandii',
       cta: 'Zostań sprzedawcą',
@@ -490,12 +574,13 @@ window.LUNCHEE_SHARED = {
     'stats.4b': 'Marka z UE',
     'stats.4': 'z pełną dokumentacją',
     'who.eyebrow': 'Jeden lunchbox, wiele zastosowań',
-    'who.hint': 'Wybierz branżę – cała strona poniżej dopasuje się do Ciebie.',
+    'who.hint': 'Wybierz, co pasuje do Ciebie – cała strona poniżej się dopasuje.',
     'who.rentals.short': 'Wynajem',
     'who.crews.short': 'Ekipy',
     'who.drivers.short': 'Kierowcy',
     'who.companies.short': 'Firmy',
     'who.stores.short': 'Sklepy',
+    'who.diet.short': 'Dieta',
     'nav.uses': 'Zastosowania',
     'nav.how': 'Jak to działa',
     'nav.product': 'Produkt',
@@ -509,6 +594,8 @@ window.LUNCHEE_SHARED = {
     'who.drivers.s': 'Ciepły posiłek bez zjeżdżania z trasy',
     'who.companies': 'Firmy',
     'who.companies.s': 'Prezent, którego zespół użyje codziennie',
+    'who.diet': 'Zdrowa dieta',
+    'who.diet.s': 'Twoja dieta na ciepło – wszędzie',
     'who.stores': 'Sklepy',
     'who.stores.s': 'Produkt, którego potrzebują Islandczycy',
     'product.eyebrow': 'Lunchee – elektryczny lunchbox',
