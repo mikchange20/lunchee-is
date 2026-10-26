@@ -3,7 +3,7 @@
 #   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR (./ for the deploy@lunchee.is account)
 # Until they are added, the job is skipped instead of failing.
 # Uses lftp over FTPS (the server needs TLS on the data connection, which lftp handles well).
-# Files are uploaded/overwritten; nothing on the server is deleted.
+# Files are uploaded/overwritten. Only repo-internal files (.git, .github, README/CLAUDE/DNS.md) are removed from the server if present.
 name: Deploy to SEOHOST (lunchee.is)
 
 on:
@@ -46,8 +46,11 @@ jobs:
             set net:max-retries 3;
             set net:timeout 30;
             open --env-password -u '$FTP_USER' '$FTP_SERVER';
+            cd '$FTP_DIR';
+            rm -r -f .git .github;
+            rm -f .gitignore README.md CLAUDE.md DNS.md;
             mirror --reverse --verbose --parallel=3 \
-              --exclude-glob .git* --exclude-glob .github/ \
-              --exclude-glob README.md --exclude-glob CLAUDE.md --exclude-glob DNS.md \
-              ./ '$FTP_DIR'
+              --exclude ^\\.git/ --exclude ^\\.github/ --exclude ^\\.gitignore\$ \
+              --exclude ^README\\.md\$ --exclude ^CLAUDE\\.md\$ --exclude ^DNS\\.md\$ \
+              ./ ./
           "
