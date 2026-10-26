@@ -6,10 +6,10 @@ once these 4 secrets exist in GitHub → Settings → Secrets and variables → 
 
 | Secret | What to put |
 |---|---|
-| `FTP_SERVER` | FTP server address from SEOHOST (e.g. `serwerXXXX.seohost.pl` or `ftp.lunchee.is`) |
-| `FTP_USERNAME` | FTP login |
+| `FTP_SERVER` | `h104.seohost.pl` (must end with seohost.pl – the server's certificate is *.seohost.pl) |
+| `FTP_USERNAME` | `deploy@lunchee.is` |
 | `FTP_PASSWORD` | FTP password |
-| `FTP_SERVER_DIR` | Folder of the lunchee.is website on the server, ending with `/` (e.g. `/domains/lunchee.is/public_html/`) |
+| `FTP_SERVER_DIR` | `./` (the deploy@lunchee.is FTP account opens directly in the website folder) |
 
 HTTPS: turn on the free SSL certificate (Let's Encrypt) for lunchee.is and www.lunchee.is in the SEOHOST panel.
 
