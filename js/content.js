@@ -294,7 +294,7 @@ window.LUNCHEE_COPY = {
       title: 'Lunchee dla wypożyczalni samochodów na Islandii',
       cta: 'Poproś o ofertę partnerską',
       why: {
-        h: 'Nowy płatny dodatek do każdego wynajmu. | Kupujesz raz, wynajmujesz cały sezon.',
+        h: 'Nowy płatny dodatek do każdego wynajmu. | Kupujesz raz, zarabiasz cały sezon.',
         lead: 'Dlaczego teraz: nowa opłata drogowa za każdy przejechany kilometr zjada zysk z każdego wynajmu. Dodatki nie wymagają nowego auta – a kuchenka w kamperze nie działa w trakcie jazdy. Lunchee tak.',
         items: [
           ['coins', 'Nowy przychód, bez nowego auta.', 'Dopisz jedną pozycję do listy dodatków. Ta sama flota, więcej pieniędzy.'],
@@ -477,8 +477,8 @@ window.LUNCHEE_COPY = {
       title: 'Lunchee dla osób na diecie na Islandii',
       cta: 'Zapytaj o cenę',
       why: {
-        h: 'Twoja dieta nie ma dnia wolnego. | Twój ciepły lunch też nie.',
-        lead: 'Planujesz posiłki, gotujesz, ważysz porcje – a dzień i tak kończy się hot dogiem na stacji. Lunchee trzyma Twoje jedzenie na ciepło w pracy, w trasie i po treningu.',
+        h: 'Trzymasz dietę? | Trzymaj też obiad na ciepło.',
+        lead: 'Planujesz posiłki, gotujesz, ważysz porcje – a i tak kończy się na hot dogu ze stacji. Lunchee trzyma Twoje jedzenie na ciepło w pracy, w trasie i po treningu.',
         items: [
           ['leaf', 'Twoje jedzenie, Twoje porcje.', 'Ty decydujesz, co jest na talerzu i ile. Bez zgadywania, co jest w jedzeniu na wynos.'],
           ['box', 'Meal prep na ciepło.', 'Gotujesz w niedzielę, jesz ciepły posiłek cały tydzień. Stalowy pojemnik 1,1 l plus 0,5 l na sałatkę albo przekąskę.'],
@@ -486,7 +486,7 @@ window.LUNCHEE_COPY = {
         ]
       },
       how: {
-        h: 'Gdziekolwiek idziesz, Twój posiłek idzie z Tobą.',
+        h: 'Twój obiad jedzie tam, gdzie Ty.',
         kind: 'diet',
         cards: [
           ['clock', 'W pracy', 'Lunch z domu, ciepły przy biurku – bez kolejki do mikrofalówki i bez jedzenia na wynos.'],
@@ -574,7 +574,7 @@ window.LUNCHEE_SHARED = {
     'stats.4b': 'Marka z UE',
     'stats.4': 'z pełną dokumentacją',
     'who.eyebrow': 'Jeden lunchbox, wiele zastosowań',
-    'who.hint': 'Wybierz, co pasuje do Ciebie – cała strona poniżej się dopasuje.',
+    'who.hint': 'Wybierz, kim jesteś – pokażemy, co Lunchee da właśnie Tobie.',
     'who.rentals.short': 'Wynajem',
     'who.crews.short': 'Ekipy',
     'who.drivers.short': 'Kierowcy',
@@ -585,17 +585,17 @@ window.LUNCHEE_SHARED = {
     'nav.how': 'Jak to działa',
     'nav.product': 'Produkt',
     'nav.faq': 'Pytania',
-    'who.h': 'Ciepły lunch, gdziekolwiek pracuje Islandia.',
+    'who.h': 'Ciepły obiad w każdym zakątku Islandii.',
     'who.rentals': 'Wypożyczalnie aut',
-    'who.rentals.s': 'Dodatkowy zarobek przy każdej rezerwacji',
+    'who.rentals.s': 'Dodatkowy zarobek na każdym wynajmie',
     'who.crews': 'Ekipy w terenie',
-    'who.crews.s': 'Koniec z jazdą na obiad na stację',
+    'who.crews.s': 'Ciepły obiad na budowie, bez jazdy na stację',
     'who.drivers': 'Kierowcy i floty',
-    'who.drivers.s': 'Ciepły posiłek bez zjeżdżania z trasy',
+    'who.drivers.s': 'Ciepły obiad w kabinie, bez szukania baru',
     'who.companies': 'Firmy',
-    'who.companies.s': 'Prezent, którego zespół użyje codziennie',
+    'who.companies.s': 'Prezent na święta, który nie wyląduje w szufladzie',
     'who.diet': 'Zdrowa dieta',
-    'who.diet.s': 'Twoja dieta na ciepło – wszędzie',
+    'who.diet.s': 'Twoje pudełka z dietą zawsze na ciepło',
     'who.stores': 'Sklepy',
     'who.stores.s': 'Produkt, którego potrzebują Islandczycy',
     'product.eyebrow': 'Lunchee – elektryczny lunchbox',
