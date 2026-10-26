@@ -33,6 +33,11 @@
   const icon = (n, cls = 'ico') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[n] || ''}</svg>`;
 
   const COLOURS = [['pearl', 'Pearl'], ['nature', 'Nature'], ['city', 'City'], ['glamour', 'Glamour']];
+  // Label shown on every section that changes with the chosen industry: "● Car rentals · change"
+  const audPill = (variant = '') => {
+    const t = $(`.tile[data-aud="${aud}"] b`);
+    return `<p class="pill pill--aud ${variant}"><i class="pill__dot" aria-hidden="true"></i><span>${t ? t.textContent : ''}</span><a href="#tabs" class="pill__change" data-change>${ui().change}</a></p>`;
+  };
   const visualCard = (v) => `<figure class="vcard reveal"><img src="assets/img/${v.img}.jpg" alt="" width="900" height="900" loading="lazy"><figcaption><span class="vcard__tag">${v.tag}</span><b>${v.h}</b><p>${v.p}</p></figcaption></figure>`;
   const placeholder = (label, ui) => `<figure class="ph" role="img" aria-label="${ui.placeholder}: ${label}">${icon('camera')}<b>${ui.placeholder}</b><span>${label}</span></figure>`;
 
@@ -139,7 +144,7 @@
         </article>
       </div>`;
     }
-    return `<div class="how__head reveal"><h2>${h.h}</h2></div>${body}`;
+    return `<div class="how__head reveal">${audPill()}<h2>${h.h}</h2></div>${body}`;
   };
 
   // Christmas campaign for companies – countdown to the last order day with delivery before Christmas (1 December)
@@ -189,7 +194,7 @@
     const tile = $(`.tile[data-aud="${aud}"] b`);
 
     $('[data-dyn="why"]').innerHTML = `
-      <div class="why__head reveal"><p class="pill">${tile ? tile.textContent : ''}</p><h2>${twoTone(c.why.h)}</h2><p class="lead">${c.why.lead}</p></div>
+      <div class="why__head reveal">${audPill('pill--on-color')}<h2>${twoTone(c.why.h)}</h2><p class="lead">${c.why.lead}</p></div>
       <ul class="why__list">${c.why.items.map(([ic, h, p]) => `<li class="reveal">${icon(ic)}<h3>${h}</h3><p>${p}</p></li>`).join('')}</ul>`;
     $('[data-dyn="how"]').innerHTML = renderHow(c.how, u);
     const xm = $('[data-dyn="xmas"]');
@@ -207,9 +212,10 @@
       tg.addEventListener('click', () => { snow.toggle(); syncToggle(); });
     }
     snow.enable(!!x);
-    $('[data-dyn="faq"]').innerHTML = `<div class="faq__head reveal"><h2>${u.faq}</h2></div>
+    $('[data-dyn="faq"]').innerHTML = `<div class="faq__head reveal">${audPill()}<h2>${u.faq}</h2></div>
       <div class="faq__list reveal">${c.faq.map(([q, a]) => `<details class="qa"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
-    $('[data-dyn="cta"]').innerHTML = `<h2>${c.form.h}</h2><p>${c.form.lead}</p>`;
+    $('[data-dyn="cta"]').innerHTML = `${audPill('pill--on-dark')}<h2>${c.form.h}</h2><p>${c.form.lead}</p>`;
+    $$('[data-go-aud]').forEach((a) => (a.dataset.goAud === aud ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
 
     // Form: keep what the person already typed in the shared fields, swap only the audience-specific ones
     $('[data-dyn="fields"]').innerHTML = c.form.fields.map(renderField).join('');
@@ -264,18 +270,27 @@
     setTimeout(() => el.classList.remove('is-unwrapping'), 900);
   };
 
-  $$('.tile').forEach((el) => el.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (el.dataset.aud === aud) return;
-    if (el.classList.contains('tile--gift')) unwrap(el);
-    aud = el.dataset.aud;
-    document.body.classList.add('is-swapping');
-    swapping = true;
-    render();
-    swapping = false;
-    setUrl();
-    requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('is-swapping')));
-  }));
+  // Switch industry (tabs, header menu). Optionally scroll to the tabs so the change is visible.
+  const scrollToTabs = () => $('#tabs').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  const select = (next, { scroll = false } = {}) => {
+    if (next !== aud && AUDS.includes(next)) {
+      const tile = $(`.tile[data-aud="${next}"]`);
+      if (tile && tile.classList.contains('tile--gift')) unwrap(tile);
+      aud = next;
+      document.body.classList.add('is-swapping');
+      swapping = true;
+      render();
+      swapping = false;
+      setUrl();
+      requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('is-swapping')));
+    }
+    if (scroll) scrollToTabs();
+  };
+  $$('.tile').forEach((el) => el.addEventListener('click', (e) => { e.preventDefault(); select(el.dataset.aud); }));
+  document.addEventListener('click', (e) => {
+    const ch = e.target instanceof Element && e.target.closest('[data-change]');
+    if (ch) { e.preventDefault(); scrollToTabs(); }
+  });
 
   // ---------- Language (EN / IS) ----------
   const originals = new Map();
@@ -339,6 +354,25 @@
 
   // Header shadow after scrolling
   const nav = $('#nav');
+
+  // ---------- Header menu: "Use cases" dropdown + mobile burger ----------
+  const burger = $('.burger');
+  const drop = $('.menu__btn');
+  const closeMenu = () => {
+    nav.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    drop.setAttribute('aria-expanded', 'false');
+  };
+  burger.addEventListener('click', () => {
+    const open = !nav.classList.contains('is-open');
+    nav.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  drop.addEventListener('click', () => drop.setAttribute('aria-expanded', String(drop.getAttribute('aria-expanded') !== 'true')));
+  document.addEventListener('click', (e) => { if (!(e.target instanceof Element) || !e.target.closest('.nav')) closeMenu(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+  $$('.menu__link').forEach((a) => a.addEventListener('click', closeMenu));
+  $$('[data-go-aud]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); closeMenu(); select(a.dataset.goAud, { scroll: true }); }));
   const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 10);
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();

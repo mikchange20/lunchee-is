@@ -8,6 +8,7 @@
   Header + hero are icy white/blue on purpose (user decision 21.10.2026); yellow is an accent.
 - Facts and limits come from the brief of 20.10.2026 (see README "Do NOT put on the page"). Never treat a vague "wszystko się da"
   as confirmation of a specific feature – ask. Logo printing is NOT offered.
+- Industry switch UX (after Natalia's feedback 26.10.2026): tiles are folder-style tabs joined to the section below (chosen tab = section colour), hint line above them, '● Industry · change' label on every section that changes, and a header menu 'Use cases' with the industries (burger menu on phones). Colours: rentals yellow, crews lime, drivers sky, companies yellow→coral gift.
 - Companies version = Christmas campaign (gift tile that unwraps, snow, snowflake cursor, countdown to 1 December).
   An older stores-Christmas variant lives on branch `xmas-campaign` in the `noveen-lp` repo.
 - Comtel (Szymon) gave written OK for the Lunchee name and lunchee.is. Natalia is buying lunchee.is → DNS steps in `DNS.md`.

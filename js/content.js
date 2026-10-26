@@ -9,6 +9,7 @@ window.LUNCHEE_COPY = {
       name: 'Full name', company: 'Company', email: 'Email', phone: 'Phone', message: 'Message',
       placeholder: 'Photo coming soon',
       faq: 'Questions you probably have.',
+      change: 'change',
       tagline: 'a hot meal anywhere you drive'
     },
     rentals: {
@@ -242,6 +243,7 @@ window.LUNCHEE_COPY = {
       name: 'Imię i nazwisko', company: 'Firma', email: 'E-mail', phone: 'Telefon', message: 'Wiadomość',
       placeholder: 'Zdjęcie wkrótce',
       faq: 'Pytania, które pewnie masz.',
+      change: 'zmień',
       tagline: 'ciepły posiłek, gdziekolwiek jedziesz'
     },
     rentals: {
@@ -488,6 +490,16 @@ window.LUNCHEE_SHARED = {
     'stats.4b': 'Marka z UE',
     'stats.4': 'z pełną dokumentacją',
     'who.eyebrow': 'Jeden lunchbox, wiele zastosowań',
+    'who.hint': 'Wybierz branżę – cała strona poniżej dopasuje się do Ciebie.',
+    'who.rentals.short': 'Wynajem',
+    'who.crews.short': 'Ekipy',
+    'who.drivers.short': 'Kierowcy',
+    'who.companies.short': 'Firmy',
+    'who.stores.short': 'Sklepy',
+    'nav.uses': 'Zastosowania',
+    'nav.how': 'Jak to działa',
+    'nav.product': 'Produkt',
+    'nav.faq': 'Pytania',
     'who.h': 'Kim jesteś?',
     'who.rentals': 'Wypożyczalnie aut',
     'who.rentals.s': 'Nowy dodatek do każdej rezerwacji',
