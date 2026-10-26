@@ -37,7 +37,7 @@ jobs:
           has_ws() { case "$1" in *[[:space:]]*) echo yes;; *) echo no;; esac; }
           echo "server: length ${#S}, spaces/newlines: $(has_ws "$S"), ends with seohost.pl: $(case "$S" in *seohost.pl) echo yes;; *) echo no;; esac)"
           echo "username: length ${#U}, spaces/newlines: $(has_ws "$U"), is deploy@lunchee.is: $([ "$U" = "deploy@lunchee.is" ] && echo yes || echo no)"
-          echo "password: length ${#P}, spaces/newlines: $(has_ws "$P")"
+          echo "password: length ${#P}, spaces/newlines: $(has_ws "$P"), bytes: $(printf %s "$P" | wc -c | tr -d ' '), hidden/non-ASCII chars: $(printf %s "$P" | LC_ALL=C grep -q '[^ -~]' && echo yes || echo no), starts/ends with quote: $(case "$P" in \"*|*\"|\'*|*\') echo yes;; *) echo no;; esac)"
           echo "server dir: is ./ : $([ "$D" = "./" ] && echo yes || echo no)"
 
       - name: Upload to SEOHOST
