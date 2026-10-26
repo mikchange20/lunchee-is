@@ -91,8 +91,19 @@
     };
   })();
 
+  // ---------- Analytics: works once the GA4 tag (gtag.js) is pasted into <head>; until then events just queue in dataLayer ----------
+  window.dataLayer = window.dataLayer || [];
+  const track = (event, params = {}) => {
+    if (typeof window.gtag === 'function') window.gtag('event', event, params);
+    else window.dataLayer.push({ event, ...params });
+  };
+
   const goToForm = (e) => {
     e.preventDefault();
+    const el = e.currentTarget instanceof Element ? e.currentTarget : null;
+    const f = $('.form');
+    f.cta.value = (el && (el.dataset.track || el.textContent.trim())) || '';
+    f.segment.value = aud;
     $('#contact').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
     setTimeout(() => $('.form [name="name"]').focus({ preventScroll: true }), 600);
   };
@@ -119,6 +130,7 @@
     if (h.kind === 'rentals' || h.kind === 'cards') {
       body = `<div class="models__grid">${h.cards.map((c) => `
         <article class="model-card reveal"><h3>${c.h}</h3><p>${c.p}</p>${mock(c.mock)}</article>`).join('')}</div>`;
+      if (h.calc) body += renderCalc(h.calc);
     } else if (h.kind === 'crews') {
       body = `<div class="models__grid">
         <article class="model-card reveal">
@@ -151,7 +163,38 @@
         </article>
       </div>`;
     }
-    return `<div class="how__head reveal">${audPill()}<h2>${h.h}</h2></div>${body}`;
+    // every audience section ends with its own call to action (rentals: the calculator has it)
+    const end = h.calc ? '' : `<div class="how__cta reveal"><a class="btn" href="#contact" data-to-form data-track="section_${aud}">${t().cta}</a></div>`;
+    return `<div class="how__head reveal">${audPill()}<h2>${h.h}</h2></div>${body}${end}`;
+  };
+
+  // Rentals: break-even calculator. No prices are filled in – the rental company enters its own numbers.
+  const renderCalc = (k) => `
+    <div class="calc reveal" data-calc>
+      <div class="calc__copy"><h3>${twoTone(k.h)}</h3><p>${k.p}</p></div>
+      <div class="calc__box">
+        <label><span>${k.cost}</span><input type="text" inputmode="numeric" autocomplete="off" data-calc-cost placeholder="ISK"></label>
+        <label><span>${k.price}</span><input type="text" inputmode="numeric" autocomplete="off" data-calc-price placeholder="ISK"></label>
+        <output class="calc__out" data-calc-out aria-live="polite"></output>
+        <a class="btn btn--block" href="#contact" data-to-form data-track="rentals_calculator">${k.cta}</a>
+      </div>
+    </div>`;
+  const nf = new Intl.NumberFormat('de-DE'); // Icelandic style: 12.000
+  const num = (el) => Number(String(el.value).replace(/[^\d]/g, '')) || 0;
+  const bindCalc = (k) => {
+    const box = $('[data-calc]');
+    if (!box) return;
+    const cost = $('[data-calc-cost]', box), price = $('[data-calc-price]', box), out = $('[data-calc-out]', box);
+    const update = () => {
+      [cost, price].forEach((el) => { const n = num(el); el.value = n ? nf.format(n) : ''; });
+      const c = num(cost), p = num(price);
+      if (!c || !p) { out.innerHTML = `<small>${k.empty}</small>`; return; }
+      const n = Math.ceil(c / p);
+      out.innerHTML = `<span>${k.result}</span><b>${n} ${n === 1 ? k.one : k.many}</b><small>${k.after.replace('{x}', nf.format(p))}</small>`;
+    };
+    cost.addEventListener('input', update);
+    price.addEventListener('input', update);
+    update();
   };
 
   // Christmas campaign for companies – countdown to the last order day with delivery before Christmas (1 December)
@@ -211,15 +254,6 @@
   };
   const artSvg = (a) => ART[a] ? `<div class="why__art" aria-hidden="true"><svg viewBox="0 0 360 260">${ART[a]}</svg></div>` : '';
 
-  const renderField = (f) => {
-    if (f.type === 'choice') {
-      const type = f.multiple ? 'checkbox' : 'radio';
-      return `<fieldset class="form__full choice"><legend>${f.label}</legend>${f.options.map((o) =>
-        `<label><input type="${type}" name="${f.name}${f.multiple ? '[]' : ''}" value="${o}"><span>${o}</span></label>`).join('')}</fieldset>`;
-    }
-    return `<label><span>${f.label}</span><input name="${f.name}" type="text" inputmode="numeric" placeholder="${f.placeholder || ''}"></label>`;
-  };
-
   const render = () => {
     const c = t();
     const u = ui();
@@ -237,7 +271,6 @@
     tag.hidden = !x;
     tag.innerHTML = x ? `${icon('gift')}<span>${x.tag}</span>` : '';
     if (x) {
-      $('[data-cta-xmas]').addEventListener('click', goToForm);
       const tg = $('[data-snow-toggle]');
       const syncToggle = () => { tg.setAttribute('aria-pressed', String(snow.on)); tg.querySelector('span').textContent = snow.on ? x.snowOn : x.snowOff; };
       syncToggle();
@@ -250,17 +283,22 @@
     $('[data-xbar-link]').textContent = u.xbarLink;
     $('[data-dyn="faq"]').innerHTML = `<div class="faq__head reveal">${audPill()}<h2>${u.faq}</h2></div>
       <div class="faq__list reveal">${c.faq.map(([q, a]) => `<details class="qa"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
-    $('[data-dyn="cta"]').innerHTML = `${audPill('pill--on-dark')}<h2>${c.form.h}</h2><p>${c.form.lead}</p>`;
+    // Closing section: one shared B2B message; the individual (diet) version has its own
+    const fc = c.b2c ? c.form : { h: u.finalH, lead: u.finalP };
+    $('[data-dyn="cta"]').innerHTML = `${audPill('pill--on-dark')}<h2>${fc.h}</h2><p>${fc.lead}</p>${c.formNote ? `<p class="cta__note">${icon('gift')}${c.formNote}</p>` : ''}`;
     $$('[data-go-aud]').forEach((a) => (a.dataset.goAud === aud ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
 
-    // Form: keep what the person already typed in the shared fields, swap only the audience-specific ones
-    $('[data-dyn="fields"]').innerHTML = c.form.fields.map(renderField).join('');
+    // Form: one B2B form; "Interested in" follows the chosen industry. Company is optional only for individuals (diet).
     const form = $('.form');
-    form.segment.value = aud;
-    form._subject.value = `Lunchee Iceland: new offer request (${aud})`;
-    $$('[data-ui]', form).forEach((el) => { el.textContent = u[el.dataset.ui]; });
-    if (c.form.companyLabel) $('[data-ui="company"]', form).textContent = c.form.companyLabel;
-    $('[data-submit]').textContent = c.form.button;
+    const sel = form.segment;
+    sel.innerHTML = AUDS.map((a) => { const b = $(`.tile[data-aud="${a}"] b`); return `<option value="${a}">${b ? b.textContent : a}</option>`; }).join('');
+    sel.value = aud;
+    $$('[data-ui]', form).forEach((el) => { el.innerHTML = u[el.dataset.ui]; });
+    $$('[data-ui-ph]', form).forEach((el) => { el.placeholder = u[el.dataset.uiPh]; });
+    form.company.required = !c.b2c;
+    $('[data-company-opt]', form).hidden = !c.b2c;
+    $('.form__head').hidden = !!c.b2c;
+    $('[data-submit]').textContent = c.b2c ? c.form.button : u.submit;
 
     $$('[data-cta]').forEach((a) => { a.textContent = c.cta; });
     $$('.tile').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.aud === aud)));
@@ -268,6 +306,7 @@
     $$('.tile[data-unlisted]').forEach((el) => { el.hidden = el.dataset.aud !== aud; });
     document.title = `${c.title} | Lunchee.is`;
     document.documentElement.dataset.aud = aud;
+    if (c.how.calc) bindCalc(c.how.calc);
     watchReveals();
   };
 
@@ -313,6 +352,7 @@
       const tile = $(`.tile[data-aud="${next}"]`);
       if (tile && tile.classList.contains('tile--gift')) unwrap(tile);
       aud = next;
+      track('segment_select', { segment: next });
       document.body.classList.add('is-swapping');
       swapping = true;
       render();
@@ -369,8 +409,14 @@
   // ?lang=pl in a link wins over the remembered choice
   setLang(new URLSearchParams(location.search).get('lang') || saved || 'en');
 
-  // ---------- Header CTA → form ----------
-  $$('[data-cta]').forEach((a) => a.addEventListener('click', goToForm));
+  // ---------- Every "to the form" button (header, hero, sections, calculator, Christmas) ----------
+  document.addEventListener('click', (e) => {
+    const a = e.target instanceof Element && e.target.closest('[data-cta], [data-to-form], [data-cta-xmas]');
+    if (!a) return;
+    track('cta_click', { cta: a.dataset.track || (a.matches('[data-cta]') ? 'header' : 'xmas'), segment: aud });
+    goToForm({ preventDefault: () => e.preventDefault(), currentTarget: a });
+  });
+  $$('[data-track]:not([data-to-form])').forEach((a) => a.addEventListener('click', () => track('cta_click', { cta: a.dataset.track, segment: aud })));
 
   // Soft glow that follows the mouse on .glow sections (mouse only, off with reduced motion) – as on the Flavo LP
   if (!reduce) {
@@ -421,8 +467,16 @@
   // ---------- Form (FormSubmit; GitHub Pages has no form backend. First request triggers an activation email.) ----------
   const form = $('.form');
   const status = $('.form__status');
+  // Where the enquiry came from: campaign tags (utm_*) or the referring site, plus the first page they landed on
+  const qs = new URLSearchParams(location.search);
+  const utm = ['utm_source', 'utm_medium', 'utm_campaign'].map((k) => qs.get(k)).filter(Boolean).join(' / ');
+  let ref = '';
+  try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (err) { /* bad referrer */ }
+  form.source.value = utm || (ref && ref !== location.hostname ? ref : 'direct');
+  form.landing_page.value = location.pathname + location.search;
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    form._subject.value = `Lunchee Iceland: new offer request (${form.segment.value})`;
     const u = ui();
     const btn = $('[data-submit]');
     status.classList.remove('is-error', 'is-ok');
@@ -432,8 +486,11 @@
       const r = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || String(data.success) === 'false') throw new Error(data.message || r.status);
+      track('generate_lead', { segment: form.segment.value, cta: form.cta.value });
+      const src = form.source.value, land = form.landing_page.value;
       form.reset();
       form.segment.value = aud;
+      form.source.value = src; form.landing_page.value = land;
       status.classList.add('is-ok');
       status.textContent = u.ok;
     } catch (err) {

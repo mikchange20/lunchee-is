@@ -107,6 +107,8 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--blue); }
 .btn--yellow { background: var(--yellow); color: var(--blue); }
 .btn--yellow:hover { background: var(--yellow-2); box-shadow: 0 14px 30px -12px rgba(242, 185, 12, .8); }
 .btn--block { width: 100%; }
+.btn--ghost { background: transparent; color: var(--blue); box-shadow: inset 0 0 0 2px var(--blue); }
+.btn--ghost:hover { background: var(--blue); color: var(--white); }
 .btn:disabled { opacity: .6; cursor: progress; }
 
 /* ---------- 1 · Header (yellow, white logo) ---------- */
@@ -561,12 +563,12 @@ html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white);
 .form__extra:empty { display: none; }
 @media (min-width: 560px) { .form__grid { grid-template-columns: 1fr 1fr; } .form__extra .choice { grid-column: 1 / -1; } }
 .form label > span, .choice legend { display: block; font-size: 14px; font-weight: 700; line-height: 1.2; color: var(--blue); margin-bottom: 6px; }
-.form input:not([type="checkbox"]):not([type="radio"]), .form textarea {
+.form input:not([type="checkbox"]):not([type="radio"]), .form textarea, .form select {
   width: 100%; font: 400 16px/1.3 var(--font); color: var(--ink);
   border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--cream);
 }
 .form textarea { resize: vertical; min-height: 84px; }
-.form input:focus, .form textarea:focus { outline: none; border-color: var(--yellow); background: var(--white); box-shadow: 0 0 0 3px rgba(242, 185, 12, .35); }
+.form input:focus, .form textarea:focus, .form select:focus { outline: none; border-color: var(--yellow); background: var(--white); box-shadow: 0 0 0 3px rgba(242, 185, 12, .35); }
 .choice { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .choice legend { padding: 0; width: 100%; }
 .choice label { cursor: pointer; }
@@ -643,3 +645,60 @@ html[data-aud="companies"] .glow { --glow: rgba(255, 255, 255, .5); --glow-2: rg
 .xbar b { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
 .xbar:hover b { text-decoration-thickness: 2px; }
 @media (min-width: 760px) { .xbar { font-size: 15px; } }
+
+/* ---------- Why Lunchee? (3 benefits) ---------- */
+.benefits { text-align: left; }
+.benefits__list { margin-top: clamp(22px, 3vw, 36px); display: grid; gap: 12px; }
+.benefits__list li { display: grid; grid-template-columns: auto 1fr; column-gap: 16px; align-items: start; padding: 20px 22px; border: 1.5px solid var(--line); border-radius: var(--radius); background: var(--white); }
+.benefits__list .ico { grid-row: span 2; width: 52px; height: 52px; padding: 11px; border-radius: 14px; background: var(--yellow); stroke-width: 2; }
+.benefits__list h3 { font-size: 21px; font-weight: 800; color: var(--blue); margin-top: 2px; }
+.benefits__list p { margin-top: 4px; color: var(--muted); font-size: 16px; }
+@media (min-width: 760px) { .benefits__list { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+
+/* product: power + no battery + what's in the box */
+.product__lead { margin-top: 14px; max-width: 62ch; font-size: 17px; color: var(--ink); }
+
+/* section call to action (end of each audience section) */
+.how__cta { margin-top: 28px; display: flex; justify-content: center; }
+
+/* ---------- Rentals: break-even calculator ---------- */
+.calc { margin-top: 20px; display: grid; gap: 22px; background: var(--blue); color: var(--white); border-radius: 28px; padding: clamp(22px, 3.4vw, 40px); }
+.calc h3 { font-size: clamp(26px, 3.2vw, 38px); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; }
+.calc h3 .tt-blue { color: var(--white); }
+.calc h3 .tt-white { color: var(--yellow); }
+.calc__copy p { margin-top: 12px; color: rgba(255, 255, 255, .88); font-size: 17px; max-width: 46ch; }
+.calc__box { display: grid; gap: 12px; background: var(--white); color: var(--ink); border-radius: 20px; padding: 20px; }
+.calc__box label > span { display: block; font-size: 14px; font-weight: 700; color: var(--blue); margin-bottom: 6px; }
+.calc__box input { width: 100%; font: 700 20px/1.2 var(--num); color: var(--ink); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--cream); }
+.calc__box input:focus { outline: none; border-color: var(--yellow); background: var(--white); box-shadow: 0 0 0 3px rgba(242, 185, 12, .35); }
+.calc__out { display: grid; gap: 2px; min-height: 76px; align-content: center; padding: 12px 16px; border-radius: 14px; background: var(--ice-2); }
+.calc__out span { font-size: 14px; font-weight: 700; color: var(--muted); }
+.calc__out b { font: 800 30px/1.1 var(--num); color: var(--blue); }
+.calc__out small { font-size: 14px; color: var(--muted); }
+@media (min-width: 960px) { .calc { grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; } }
+
+/* ---------- Trust: Lunchee by N'OVEEN ---------- */
+.trust { background: var(--white); padding: clamp(52px, 7vw, 88px) var(--gutter) 0; }
+.trust__inner { max-width: var(--max); margin: 0 auto; display: grid; gap: 24px; align-items: center; }
+.trust__brand { background: var(--blue); border-radius: 28px; display: grid; place-items: center; padding: clamp(28px, 5vw, 56px); }
+.trust__brand img { width: min(280px, 70%); }
+.trust__copy p { margin-top: 12px; font-size: 18px; max-width: 52ch; }
+.trust__list { margin-top: 20px; display: grid; gap: 12px; }
+.trust__list li { padding-left: 30px; position: relative; }
+.trust__list li::before { content: ""; position: absolute; left: 0; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230054A6' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 13px no-repeat; }
+.trust__list b { display: block; color: var(--blue); font-weight: 800; }
+.trust__list span { color: var(--muted); font-size: 15px; }
+.trust__contact { font-size: 15px !important; color: var(--muted); }
+.trust__contact a { color: var(--blue); font-weight: 700; }
+@media (min-width: 960px) { .trust__inner { grid-template-columns: .8fr 1.2fr; gap: 56px; } }
+
+/* ---------- Form: heading, optional marks, Christmas note ---------- */
+.form__head h3 { font-size: 22px; font-weight: 800; line-height: 1.15; color: var(--blue); }
+.form__head p { margin-top: 6px; font-size: 15px; color: var(--muted); }
+.form__head[hidden] { display: none; }
+.form .opt { font-style: normal; font-weight: 500; color: var(--muted); }
+.form .opt[hidden] { display: none; }
+.form select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230054A6' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 18px; padding-right: 40px !important; }
+.form__status.is-ok { padding: 14px 16px; border-radius: 12px; background: #E8F5EA; }
+.cta__note { display: flex; gap: 10px; align-items: center; font-weight: 700; color: var(--yellow) !important; }
+.cta__note .ico { width: 22px; height: 22px; stroke: var(--yellow); }
