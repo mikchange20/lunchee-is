@@ -1,7 +1,9 @@
 # Uploads the website to the SEOHOST server (lunchee.is) on every push to main.
 # Needs 4 repository secrets (Settings → Secrets and variables → Actions):
-#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR (e.g. /domains/lunchee.is/public_html/)
+#   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_SERVER_DIR (./ for the deploy@lunchee.is account)
 # Until they are added, the job is skipped instead of failing.
+# Uses lftp over FTPS (the server needs TLS on the data connection, which lftp handles well).
+# Files are uploaded/overwritten; nothing on the server is deleted.
 name: Deploy to SEOHOST (lunchee.is)
 
 on:
@@ -26,33 +28,26 @@ jobs:
       - uses: actions/checkout@v4
         if: env.FTP_SERVER != ''
 
-      - name: Check the server details (shows only lengths and yes/no, never the values)
+      - name: Install lftp
         if: env.FTP_SERVER != ''
-        env:
-          U: ${{ secrets.FTP_USERNAME }}
-          P: ${{ secrets.FTP_PASSWORD }}
-          D: ${{ secrets.FTP_SERVER_DIR }}
-          S: ${{ secrets.FTP_SERVER }}
-        run: |
-          has_ws() { case "$1" in *[[:space:]]*) echo yes;; *) echo no;; esac; }
-          echo "server: length ${#S}, spaces/newlines: $(has_ws "$S"), ends with seohost.pl: $(case "$S" in *seohost.pl) echo yes;; *) echo no;; esac)"
-          echo "username: length ${#U}, spaces/newlines: $(has_ws "$U"), is deploy@lunchee.is: $([ "$U" = "deploy@lunchee.is" ] && echo yes || echo no)"
-          echo "password: length ${#P}, spaces/newlines: $(has_ws "$P"), bytes: $(printf %s "$P" | wc -c | tr -d ' '), hidden/non-ASCII chars: $(printf %s "$P" | LC_ALL=C grep -q '[^ -~]' && echo yes || echo no), starts/ends with quote: $(case "$P" in \"*|*\"|\'*|*\') echo yes;; *) echo no;; esac)"
-          echo "server dir: is ./ : $([ "$D" = "./" ] && echo yes || echo no)"
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
       - name: Upload to SEOHOST
         if: env.FTP_SERVER != ''
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          protocol: ftps
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            README.md
-            CLAUDE.md
-            DNS.md
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          lftp -c "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ftp:passive-mode true;
+            set net:max-retries 3;
+            set net:timeout 30;
+            open --env-password -u '$FTP_USER' '$FTP_SERVER';
+            mirror --reverse --verbose --parallel=3 \
+              --exclude-glob .git* --exclude-glob .github/ \
+              --exclude-glob README.md --exclude-glob CLAUDE.md --exclude-glob DNS.md \
+              ./ '$FTP_DIR'
+          "
