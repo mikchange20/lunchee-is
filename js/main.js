@@ -336,6 +336,8 @@
 
   // Unwrap the gift tile: bow flies off, ribbon drops, confetti
   const unwrap = (el) => {
+    el.classList.add('is-open');
+    document.documentElement.classList.add('gift-open');
     if (reduce) return;
     el.classList.remove('is-unwrapping'); void el.offsetWidth; el.classList.add('is-unwrapping');
     const colors = ['#F2B90C', '#F26A3D', '#0054A6', '#BCDD3F', '#7693DF', '#FFFFFF'];
@@ -356,6 +358,8 @@
     if (next !== aud && AUDS.includes(next)) {
       const tile = $(`.tile[data-aud="${next}"]`);
       if (tile && tile.classList.contains('tile--gift')) unwrap(tile);
+      // Leaving the Christmas version wraps the gift again (and drops the snowflake cursor)
+      if (aud === 'companies') { $('.tile--gift')?.classList.remove('is-open'); document.documentElement.classList.remove('gift-open'); }
       aud = next;
       track('segment_select', { segment: next });
       document.body.classList.add('is-swapping');
@@ -371,7 +375,12 @@
     $('#tabs').prepend($('.tile[data-aud="companies"]'));
     $('#menu-uses').prepend($('[data-go-aud="companies"]').closest('li'));
   }
-  $$('.tile').forEach((el) => el.addEventListener('click', (e) => { e.preventDefault(); select(el.dataset.aud); }));
+  $$('.tile').forEach((el) => el.addEventListener('click', (e) => {
+    e.preventDefault();
+    // The gift starts wrapped even when it is the default version – the first click opens it
+    if (el.dataset.aud === aud && el.classList.contains('tile--gift') && !el.classList.contains('is-open')) unwrap(el);
+    select(el.dataset.aud);
+  }));
   $('[data-xbar]').addEventListener('click', (e) => { e.preventDefault(); select('companies', { scroll: true }); });
   document.addEventListener('click', (e) => {
     const ch = e.target instanceof Element && e.target.closest('[data-change]');

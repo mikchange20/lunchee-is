@@ -610,18 +610,19 @@ html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white);
 .hero-wrap.glow { --glow: rgba(242, 185, 12, .3); --glow-2: rgba(118, 147, 223, .16); }
 .cta.glow, .foot.glow { --glow: rgba(242, 185, 12, .34); --glow-2: rgba(118, 147, 223, .2); }
 
-/* ---------- "Companies" tile wrapped as a Christmas gift – unwraps on click ---------- */
+/* ---------- "Companies" tile wrapped as a Christmas gift – stays wrapped (even when chosen) until clicked ---------- */
 .tile--gift { overflow: visible; }
-@media (min-width: 760px) { .tile--gift:not([aria-pressed="true"]) { padding-right: 52px; } }
-.tile--gift:not([aria-pressed="true"]) { background: linear-gradient(135deg, var(--coral) 0%, #D9442A 100%); border-color: transparent; box-shadow: var(--shadow); }
-.tile--gift:not([aria-pressed="true"]) b, .tile--gift:not([aria-pressed="true"]) > span, .tile--gift:not([aria-pressed="true"]) .tile__short { color: var(--white); }
-.tile--gift:not([aria-pressed="true"]) .ico { stroke: var(--white); }
-.tile--gift:not([aria-pressed="true"]):hover { animation: gift-wiggle .6s ease-in-out; }
+@media (min-width: 760px) { .tile--gift:not(.is-open) { padding-right: 52px; } }
+.tile--gift:not(.is-open) { cursor: pointer; transform: none; background: linear-gradient(135deg, var(--coral) 0%, #D9442A 100%); border-color: transparent; box-shadow: var(--shadow); }
+.tile--gift:not(.is-open) b, .tile--gift:not(.is-open) > span, .tile--gift:not(.is-open) .tile__short { color: var(--white); }
+.tile--gift:not(.is-open) .ico { stroke: var(--white); }
+.tile--gift:not(.is-open)::after { display: none; }
+.tile--gift:not(.is-open):hover { animation: gift-wiggle .6s ease-in-out; }
 @media (min-width: 760px) { .gift__ribbon { right: 22px; width: 14px; } .gift__bow { top: -18px; right: -2px; width: 58px; } }
 @keyframes gift-wiggle { 20% { transform: translateY(-4px) rotate(-2deg); } 50% { transform: translateY(-4px) rotate(2deg); } 80% { transform: translateY(-4px) rotate(-1deg); } }
 .gift__ribbon { position: absolute; top: 0; bottom: 0; right: 14px; width: 10px; background: var(--yellow); box-shadow: inset 3px 0 rgba(255, 255, 255, .35); border-radius: 2px; pointer-events: none; transform-origin: bottom; }
 .gift__bow { position: absolute; top: -14px; right: -6px; width: 44px; fill: var(--yellow); stroke: var(--yellow); filter: drop-shadow(0 4px 4px rgba(120, 40, 0, .3)); pointer-events: none; }
-.tile--gift[aria-pressed="true"] .gift__ribbon, .tile--gift[aria-pressed="true"] .gift__bow { opacity: 0; visibility: hidden; }
+.tile--gift.is-open .gift__ribbon, .tile--gift.is-open .gift__bow { opacity: 0; visibility: hidden; }
 .tile--gift.is-unwrapping { animation: gift-pop .5s var(--ease); }
 .tile--gift.is-unwrapping .gift__ribbon { visibility: visible; animation: ribbon-off .6s var(--ease) forwards; }
 .tile--gift.is-unwrapping .gift__bow { visibility: visible; animation: bow-off .8s var(--ease) forwards; }
@@ -631,8 +632,8 @@ html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white);
 .confetti { position: absolute; left: 50%; top: 40%; width: 8px; height: 12px; border-radius: 2px; pointer-events: none; z-index: 3; animation: confetti-fly .9s cubic-bezier(.15, .7, .3, 1) forwards; }
 @keyframes confetti-fly { from { opacity: 1; transform: translate(-50%, -50%) rotate(0); } to { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); } }
 
-/* snowflake cursor in the Christmas campaign (companies) */
-html[data-aud="companies"] body { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke-linecap='round'%3E%3Cg stroke='%230054A6' stroke-width='3.2'%3E%3Cpath d='M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7'/%3E%3C/g%3E%3Cg stroke='%23fff' stroke-width='1.6'%3E%3Cpath d='M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9 4l3 2 3-2M9 20l3-2 3 2'/%3E%3C/g%3E%3C/svg%3E") 14 14, auto; }
+/* snowflake cursor in the Christmas campaign (companies), switched on by opening the gift */
+html[data-aud="companies"].gift-open body { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke-linecap='round'%3E%3Cg stroke='%230054A6' stroke-width='3.2'%3E%3Cpath d='M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7'/%3E%3C/g%3E%3Cg stroke='%23fff' stroke-width='1.6'%3E%3Cpath d='M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9 4l3 2 3-2M9 20l3-2 3 2'/%3E%3C/g%3E%3C/svg%3E") 14 14, auto; }
 html[data-aud="companies"] .glow { --glow: rgba(255, 255, 255, .5); --glow-2: rgba(118, 147, 223, .2); }
 
 @media (prefers-reduced-motion: reduce) {
