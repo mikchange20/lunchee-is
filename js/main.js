@@ -381,7 +381,12 @@
     if (el.dataset.aud === aud && el.classList.contains('tile--gift') && !el.classList.contains('is-open')) unwrap(el);
     select(el.dataset.aud);
   }));
-  $('[data-xbar]').addEventListener('click', (e) => { e.preventDefault(); select('companies', { scroll: true }); });
+  // Christmas bar: switch to the companies version and go straight to the offer form
+  $('[data-xbar]').addEventListener('click', (e) => {
+    select('companies');
+    track('cta_click', { cta: 'xmas_bar', segment: 'companies' });
+    goToForm(e);
+  });
   document.addEventListener('click', (e) => {
     const ch = e.target instanceof Element && e.target.closest('[data-change]');
     if (ch) { e.preventDefault(); scrollToTabs(); }

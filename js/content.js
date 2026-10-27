@@ -18,8 +18,8 @@ window.LUNCHEE_COPY = {
       faq: 'Questions you probably have.',
       change: 'change',
       tagline: 'a hot meal anywhere you drive',
-      xbar: 'Christmas gift for your team? Order by 1 December – delivered before Christmas.',
-      xbarLink: 'See the gift offer'
+      xbar: 'Planning Christmas gifts for your employees?',
+      xbarLink: 'Ask for an offer'
     },
     rentals: {
       title: 'Lunchee for car rentals in Iceland',
@@ -261,8 +261,8 @@ window.LUNCHEE_COPY = {
       faq: 'Pytania, które pewnie masz.',
       change: 'zmień',
       tagline: 'ciepły posiłek, gdziekolwiek jedziesz',
-      xbar: 'Prezent świąteczny dla zespołu? Zamów do 1 grudnia – dostarczymy przed świętami.',
-      xbarLink: 'Zobacz ofertę'
+      xbar: 'Planujesz prezenty świąteczne dla swoich pracowników?',
+      xbarLink: 'Zapytaj o ofertę'
     },
     rentals: {
       title: 'Lunchee dla wypożyczalni samochodów na Islandii',
