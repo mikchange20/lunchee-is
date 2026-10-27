@@ -455,6 +455,7 @@ html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white);
 .xmas__plan li:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 28px; bottom: 4px; width: 2px; background: rgba(255, 255, 255, .25); }
 .xmas__plan b { display: block; font: 800 16px/1.2 var(--num); color: var(--yellow); }
 .xmas__plan span { font-size: 15px; color: rgba(255, 255, 255, .88); }
+html:not(.gift-open) .snow-toggle { display: none; }
 .snow-toggle { display: inline-flex; align-items: center; gap: 6px; margin: 14px 0 0 12px; background: none; border: 0; color: rgba(255, 255, 255, .75); font: 600 13px/1 var(--font); cursor: pointer; }
 .snow-toggle .ico { width: 16px; height: 16px; stroke: currentColor; }
 .snow-toggle[aria-pressed="false"] { opacity: .6; }

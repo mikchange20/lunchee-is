@@ -276,7 +276,8 @@
       syncToggle();
       tg.addEventListener('click', () => { snow.toggle(); syncToggle(); });
     }
-    snow.enable(!!x);
+    // Snow starts only once the gift tile has been opened
+    snow.enable(!!x && document.documentElement.classList.contains('gift-open'));
     const bar = $('[data-xbar]');
     bar.hidden = !XMAS_ON || aud === 'companies';
     $('[data-xbar-text]').textContent = u.xbar;
@@ -338,6 +339,7 @@
   const unwrap = (el) => {
     el.classList.add('is-open');
     document.documentElement.classList.add('gift-open');
+    if (aud === 'companies') snow.enable(true);
     if (reduce) return;
     el.classList.remove('is-unwrapping'); void el.offsetWidth; el.classList.add('is-unwrapping');
     const colors = ['#F2B90C', '#F26A3D', '#0054A6', '#BCDD3F', '#7693DF', '#FFFFFF'];
