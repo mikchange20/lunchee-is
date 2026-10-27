@@ -197,7 +197,7 @@
     update();
   };
 
-  // Christmas campaign for companies – countdown to the last order day with delivery before Christmas (1 December)
+  // Christmas campaign for companies – no delivery promise: the date is confirmed in the offer
   const renderXmas = (x) => `
     <div class="xmas__inner">
       <div class="xmas__head reveal">
@@ -205,9 +205,7 @@
         <h2>${twoTone(x.h)}</h2>
         <p class="lead">${x.lead}</p>
       </div>
-      ${daysToOrder() > 0 ? `<div class="xmas__count reveal" aria-live="off">
-        <b>${daysToOrder()}</b><span>${x.countdown}</span><em>${x.greeting}</em>
-      </div>` : ''}
+      <div class="xmas__count reveal">${icon('gift')}<span>${x.note}</span><em>${x.greeting}</em></div>
       <h3 class="xmas__sub reveal">${x.guideH}</h3>
       <ul class="guide">${x.guide.map(([f, h, p]) => `
         <li class="reveal"><span class="guide__tag">${icon('gift')}</span><img src="assets/img/${f}.jpg" alt="" width="900" height="900" loading="lazy"><b>${h}</b><p>${p}</p></li>`).join('')}</ul>

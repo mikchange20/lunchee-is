@@ -124,8 +124,8 @@ window.LUNCHEE_COPY = {
         pill: 'Christmas campaign for companies',
         h: '13 Yule Lads. | One gift the whole team will use.',
         lead: 'Give every employee a hot lunch – at the desk, on site or on the road. A practical Christmas gift that stays in use all year, not in a drawer.',
-        countdown: 'days left to order for Christmas',
-        greeting: 'Order by 1 December – delivered before Christmas. Gleðileg jól!',
+        note: 'Send us an enquiry – we’ll confirm the delivery date with your offer.',
+        greeting: 'Gleðileg jól!',
         guideH: 'A gift for everyone on the team',
         guide: [
           ['pearl', 'For the office', 'Lunch from home, warm at the desk – no queue for the microwave.'],
@@ -141,16 +141,16 @@ window.LUNCHEE_COPY = {
         ],
         planH: 'How it works',
         plan: [
-          ['Now – 1 December', 'Tell us your team size and colours.'],
-          ['Within days', 'You get an offer and a company invoice.'],
-          ['Before Christmas', 'The gifts are delivered to your office.']
+          ['Send an enquiry', 'Tell us your team size and colours.'],
+          ['Within days', 'You get an offer with a confirmed delivery date.'],
+          ['Delivery', 'The gifts arrive at your office on the agreed date.']
         ],
         cta: 'Order gifts for your team',
         snowOn: 'Snow: on',
         snowOff: 'Snow: off'
       },
       cta: 'Request a corporate offer',
-      formNote: 'Order by 1 December and we’ll deliver before Christmas.',
+      formNote: 'Planning Christmas gifts? Send an enquiry – we’ll confirm the delivery date with your offer.',
       why: {
         h: 'A gift your employees | will actually use.',
         lead: 'A practical solution for employee gifts and teams working on the move.',
@@ -172,7 +172,7 @@ window.LUNCHEE_COPY = {
       },
       faq: [
         ['Can we order for the whole company?', 'Yes – from a few units to hundreds. Mix colours in one order.'],
-        ['Will it arrive before Christmas?', 'Order by 1 December and we’ll deliver before Christmas.'],
+        ['Will it arrive before Christmas?', 'Send your enquiry as early as you can – we’ll confirm the delivery date in the offer, before you order.'],
         ['Is it a quality product?', 'Yes – a European brand with full documentation and a local contact in Iceland.'],
         ['Invoice for the company?', 'Yes, a regular company invoice.']
       ],    },
@@ -367,8 +367,8 @@ window.LUNCHEE_COPY = {
         pill: 'Świąteczna kampania dla firm',
         h: '13 islandzkich Mikołajów. | Jeden prezent, którego użyje cały zespół.',
         lead: 'Daj każdemu pracownikowi ciepły lunch – przy biurku, na budowie albo w trasie. Praktyczny prezent na święta, który zostaje w użyciu przez cały rok, a nie w szufladzie.',
-        countdown: 'dni na zamówienie przed świętami',
-        greeting: 'Zamów do 1 grudnia – dostarczymy przed świętami. Gleðileg jól!',
+        note: 'Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
+        greeting: 'Gleðileg jól!',
         guideH: 'Prezent dla każdego w zespole',
         guide: [
           ['pearl', 'Dla biura', 'Lunch z domu, ciepły przy biurku – bez kolejki do mikrofali.'],
@@ -384,16 +384,16 @@ window.LUNCHEE_COPY = {
         ],
         planH: 'Jak to działa',
         plan: [
-          ['Teraz – 1 grudnia', 'Napisz, ile osób liczy zespół i jakie kolory.'],
-          ['W ciągu kilku dni', 'Dostajesz ofertę i fakturę na firmę.'],
-          ['Przed świętami', 'Prezenty trafiają do Twojego biura.']
+          ['Wyślij zapytanie', 'Napisz, ile osób liczy zespół i jakie kolory.'],
+          ['W ciągu kilku dni', 'Dostajesz ofertę z potwierdzonym terminem dostawy.'],
+          ['Dostawa', 'Prezenty trafiają do Twojego biura w ustalonym terminie.']
         ],
         cta: 'Zamów prezenty dla zespołu',
         snowOn: 'Śnieg: wł.',
         snowOff: 'Śnieg: wył.'
       },
       cta: 'Poproś o ofertę dla firmy',
-      formNote: 'Zamów do 1 grudnia, a dostarczymy przed świętami.',
+      formNote: 'Planujesz prezenty świąteczne? Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
       why: {
         h: 'Prezent, z którego pracownicy | naprawdę będą korzystać.',
         lead: 'Praktyczny pomysł na prezent dla pracowników i dla zespołów, które pracują w ruchu.',
@@ -415,7 +415,7 @@ window.LUNCHEE_COPY = {
       },
       faq: [
         ['Czy możemy zamówić dla całej firmy?', 'Tak – od kilku do kilkuset sztuk. Kolory można mieszać w jednym zamówieniu.'],
-        ['Czy dotrze przed świętami?', 'Zamów do 1 grudnia, a dostarczymy przed świętami.'],
+        ['Czy dotrze przed świętami?', 'Wyślij zapytanie jak najwcześniej – termin dostawy potwierdzimy w ofercie, zanim złożysz zamówienie.'],
         ['Czy to dobry jakościowo produkt?', 'Tak – europejska marka z pełną dokumentacją i lokalnym kontaktem na Islandii.'],
         ['Faktura na firmę?', 'Tak, standardowa faktura dla firmy.']
       ],    },
