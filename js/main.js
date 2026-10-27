@@ -300,7 +300,12 @@
     $('.form__head').hidden = !!c.b2c;
     $('[data-submit]').textContent = c.b2c ? c.form.button : u.submit;
 
-    $$('[data-cta]').forEach((a) => { a.textContent = c.cta; });
+    $$('[data-cta]').forEach((a) => {
+      // Phones get a short label so the header button stays on one line
+      a.innerHTML = '<span class="cta-long"></span><span class="cta-short"></span>';
+      a.firstChild.textContent = c.cta;
+      a.lastChild.textContent = c.b2c ? c.cta : u.navShort;
+    });
     $$('.tile').forEach((el) => el.setAttribute('aria-pressed', String(el.dataset.aud === aud)));
     // Unlisted audiences: no tile on the page, but their direct link (e.g. /stores) still works
     $$('.tile[data-unlisted]').forEach((el) => { el.hidden = el.dataset.aud !== aud; });
