@@ -284,12 +284,15 @@ html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white);
 /* see-through line drawing on the right of the headline (one per audience) */
 .why__art { display: none; }
 @media (min-width: 960px) {
-  .why__art { display: block; position: absolute; z-index: -1; top: -6px; right: 0; width: min(40%, 440px); pointer-events: none; opacity: .55; }
-  .why__art svg { width: 100%; height: auto; fill: none; stroke: var(--white); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+  /* the drawing sits next to the headline and shrinks to its height, so the cards never cover it */
+  .why__inner { display: grid; grid-template-columns: minmax(0, 1fr) min(38%, 420px); column-gap: 32px; }
+  .why__head { grid-column: 1; grid-row: 1; }
+  .why__list { grid-column: 1 / -1; grid-row: 2; }
+  .why__art { display: block; grid-column: 2; grid-row: 1; position: relative; z-index: -1; min-height: 0; margin: -28px 0 calc(8px - clamp(28px, 4vw, 44px)); pointer-events: none; opacity: .55; }
+  .why__art svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--white); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
   .why__art .f { fill: rgba(255, 255, 255, .16); }
   .why__art .f2 { fill: var(--white); }
   .why__art .b { stroke-width: 5; }
-  .why__head { max-width: 60%; }
 }
 @media (min-width: 960px) and (prefers-reduced-motion: no-preference) { .why__art svg { animation: art-float 7s ease-in-out infinite; } }
 @keyframes art-float { 50% { transform: translateY(-10px) rotate(-1deg); } }

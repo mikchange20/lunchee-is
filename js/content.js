@@ -186,7 +186,7 @@ window.LUNCHEE_COPY = {
         lead: 'Enjoy homemade meals wherever your day takes you.',
         items: [
           ['leaf', 'Your food, your portions.', 'You decide what’s on the plate and how much. No guessing what’s in the takeaway.'],
-          ['box', 'Meal prep, served hot.', 'Cook on Sunday, eat a hot meal all week. 1.1 L steel container plus a 0.5 L one for a salad or snack.'],
+          ['box', 'Meal prep, served hot.', 'Cook on Sunday, eat a hot meal all week. 1.1 L steel container plus a 0.5 L one for a salad or snack.'],
           ['wallet', 'Cheaper than eating out.', 'Healthy food on the go costs a fortune in Iceland. Bring your own.']
         ]
       },
@@ -198,12 +198,12 @@ window.LUNCHEE_COPY = {
           ['plug', 'On the road', 'Plugs into the car socket – a proper meal instead of station food.'],
           ['dumbbell', 'After training', 'Plug it in before the workout – your meal is hot when you’re done.']
         ],
-        visual: { img: 'inox', tag: 'In the box', h: 'Heated in steel, not plastic', p: 'Your food sits in a removable 1.1 L stainless steel container. Dishwasher safe.' }
+        visual: { img: 'inox', tag: 'In the box', h: 'Heated in steel, not plastic', p: 'Your food sits in a removable 1.1 L stainless steel container. Dishwasher safe.' }
       },
       faq: [
         ['Where can I buy it?', 'Lunchee is just arriving in Iceland. Send us the form below and we’ll tell you how to get one.'],
         ['What touches my food?', 'A removable stainless steel (INOX) container. The materials are BPA-free.'],
-        ['How much food fits?', '1.1 L in the main container, plus a 0.5 L container with a lid for a salad or snack.'],
+        ['How much food fits?', '1.1 L in the main container, plus a 0.5 L container with a lid for a salad or snack.'],
         ['Does it work at home and in the office?', 'Yes – the 230V cable is in the box, next to the 12V/24V car cable.'],
         ['How long does it take?', 'About 20 minutes; food from the fridge on a cold day needs a bit longer.']
       ],
@@ -232,7 +232,7 @@ window.LUNCHEE_COPY = {
         shelf: 'In store',
         online: 'Online',
         product: 'Lunchee electric lunch box',
-        productSub: '12/24 V car + 230 V · thermal bag included',
+        productSub: '12/24 V car + 230 V · thermal bag included',
         badge: 'New',
         stock: 'Available'
       },
@@ -475,7 +475,7 @@ window.LUNCHEE_COPY = {
         shelf: 'W sklepie',
         online: 'Online',
         product: 'Elektryczny lunchbox Lunchee',
-        productSub: '12/24 V auto + 230 V · torba termiczna w zestawie',
+        productSub: '12/24 V auto + 230 V · torba termiczna w zestawie',
         badge: 'Nowość',
         stock: 'Dostępny'
       },
@@ -549,28 +549,28 @@ window.LUNCHEE_SHARED = {
     'trust.contact': 'Kontakt na Islandii:',
     'product.alt': 'Otwarty lunchbox z ciepłym posiłkiem',
     'kit.bag': 'Torba termiczna',
-    'kit.cables': 'Kable 12/24 V + 230 V',
-    'kit.inox': 'Pojemnik INOX 1,1 L',
+    'kit.cables': 'Kable 12/24 V + 230 V',
+    'kit.inox': 'Pojemnik INOX 1,1 L',
     'colours.p': 'Cztery kolory, ta sama specyfikacja. <b>Mieszaj kolory w jednym zamówieniu.</b>',
     'steps.h': '<b>Ciepły posiłek</b> w 5 krokach',
     'steps.1': 'Przygotuj', 'steps.1s': 'Włóż posiłek do lunchboxa.',
     'steps.2': 'Spakuj', 'steps.2s': 'Włóż go do torby termicznej.',
     'steps.3': 'Podłącz', 'steps.3s': '12V / 24V w pojeździe albo 230V.',
-    'steps.4': 'Odczekaj ok. 20 min', 'steps.4s': 'Zależy od jedzenia i temperatury.',
+    'steps.4': 'Odczekaj ok. 20 min', 'steps.4s': 'Zależy od jedzenia i temperatury.',
     'steps.5': 'Jedz', 'steps.5s': 'Tam, gdzie się zatrzymasz.',
     'specs.h': 'Specyfikacja',
-    'specs.power': 'Zasilanie', 'specs.power.v': '12 V auto / 24 V ciężarówka / 230 V sieć',
+    'specs.power': 'Zasilanie', 'specs.power.v': '12 V auto / 24 V ciężarówka / 230 V sieć',
     'specs.watt': 'Moc',
-    'specs.heat': 'Podgrzewanie', 'specs.heat.v': 'do 60°C, zwykle ok. 20 min (zależy od jedzenia i temperatury)',
+    'specs.heat': 'Podgrzewanie', 'specs.heat.v': 'do 60°C, zwykle ok. 20 min (zależy od jedzenia i temperatury)',
     'specs.batt': 'Bateria', 'specs.batt.v': 'Brak – działa po podłączeniu',
-    'specs.main': 'Pojemnik główny', 'specs.main.v': '1,1 L, stal nierdzewna (INOX), wyjmowany',
-    'specs.extra': 'Pojemnik dodatkowy', 'specs.extra.v': '0,5 L z pokrywką',
+    'specs.main': 'Pojemnik główny', 'specs.main.v': '1,1 L, stal nierdzewna (INOX), wyjmowany',
+    'specs.extra': 'Pojemnik dodatkowy', 'specs.extra.v': '0,5 L z pokrywką',
     'specs.dim': 'Wymiary', 'specs.dim.v': '23 × 16 × 10,5 cm',
-    'specs.weight': 'Waga', 'specs.weight.v': '0,63 kg',
+    'specs.weight': 'Waga', 'specs.weight.v': '0,63 kg',
     'specs.mat': 'Materiały', 'specs.mat.v': 'bez BPA',
     'specs.dish': 'Zmywarka', 'specs.dish.v': 'Tak (pojemniki)',
     'specs.box': 'W zestawie',
-    'specs.box.v': 'Lunchbox z pojemnikiem INOX 1,1 L · pojemnik 0,5 L z pokrywką · metalowa łyżka i widelec · kabel 230 V · kabel samochodowy 12/24 V · torba termiczna.',
+    'specs.box.v': 'Lunchbox z pojemnikiem INOX 1,1 L · pojemnik 0,5 L z pokrywką · metalowa łyżka i widelec · kabel 230 V · kabel samochodowy 12/24 V · torba termiczna.',
     'specs.know': 'Dobrze wiedzieć',
     'specs.know.v': 'Czas podgrzewania zależy od posiłku i temperatury na zewnątrz – jedzenie z lodówki w zimny dzień potrzebuje trochę więcej czasu. Podczas podgrzewania zostaw otwarty zawór. Nigdy nie włączaj pustego lunchboxa.',
     'foot.p': 'Oficjalny partner Lunchee na Islandii'
