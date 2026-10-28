@@ -124,7 +124,7 @@ window.LUNCHEE_COPY = {
         pill: 'Christmas campaign for companies',
         h: '13 Yule Lads. | One gift the whole team will use.',
         lead: 'Give every employee a hot lunch – at the desk, on site or on the road. A practical Christmas gift that stays in use all year, not in a drawer.',
-        note: 'Send us an enquiry – we’ll confirm the delivery date with your offer.',
+        note: 'From 9,000 ISK per unit, excl. VAT (án VSK). Send an enquiry – we’ll confirm the delivery date with your offer.',
         greeting: 'Gleðileg jól!',
         guideH: 'A gift for everyone on the team',
         guide: [
@@ -174,6 +174,7 @@ window.LUNCHEE_COPY = {
         ['Can we order for the whole company?', 'Yes – from a few units to hundreds. Mix colours in one order.'],
         ['Will it arrive before Christmas?', 'Send your enquiry as early as you can – we’ll confirm the delivery date in the offer, before you order.'],
         ['Is it a quality product?', 'Yes – a European brand with full documentation and a local contact in Iceland.'],
+        ['How much does it cost?', 'Per unit, excl. VAT (án VSK): 11,000 ISK for 1–9 units, 10,000 ISK for 10–49 units, 9,000 ISK from 50 units. Thermal bag included.'],
         ['Invoice for the company?', 'Yes, a regular company invoice.']
       ],    },
 
@@ -367,7 +368,7 @@ window.LUNCHEE_COPY = {
         pill: 'Świąteczna kampania dla firm',
         h: '13 islandzkich Mikołajów. | Jeden prezent, którego użyje cały zespół.',
         lead: 'Daj każdemu pracownikowi ciepły lunch – przy biurku, na budowie albo w trasie. Praktyczny prezent na święta, który zostaje w użyciu przez cały rok, a nie w szufladzie.',
-        note: 'Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
+        note: 'Od 9 000 ISK za sztukę netto (án VSK). Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
         greeting: 'Gleðileg jól!',
         guideH: 'Prezent dla każdego w zespole',
         guide: [
@@ -417,6 +418,7 @@ window.LUNCHEE_COPY = {
         ['Czy możemy zamówić dla całej firmy?', 'Tak – od kilku do kilkuset sztuk. Kolory można mieszać w jednym zamówieniu.'],
         ['Czy dotrze przed świętami?', 'Wyślij zapytanie jak najwcześniej – termin dostawy potwierdzimy w ofercie, zanim złożysz zamówienie.'],
         ['Czy to dobry jakościowo produkt?', 'Tak – europejska marka z pełną dokumentacją i lokalnym kontaktem na Islandii.'],
+        ['Ile to kosztuje?', 'Za sztukę netto (án VSK): 11 000 ISK przy 1–9 szt., 10 000 ISK przy 10–49 szt., 9 000 ISK od 50 szt. Torba termiczna w zestawie.'],
         ['Faktura na firmę?', 'Tak, standardowa faktura dla firmy.']
       ],    },
 
