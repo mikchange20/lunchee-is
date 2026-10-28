@@ -12,7 +12,7 @@
 - Companies version = Christmas campaign (gift tile that unwraps, snow, snowflake cursor, countdown to 1 December).
   An older stores-Christmas variant lives on branch `xmas-campaign` in the `noveen-lp` repo.
 - Comtel (Szymon) gave written OK for the Lunchee name and lunchee.is. lunchee.is is hosted on Natalia's SEOHOST server (27.10.2026); pushes to main upload there via GitHub Actions + lftp over FTPS (see DNS.md). FTP account deploy@lunchee.is (folder ./), FTP_SERVER must be h104.seohost.pl (the server's TLS cert is *.seohost.pl). Live on http://lunchee.is since 26.10.2026; HTTPS waits for Natalia to enable Let's Encrypt for lunchee.is. Never ask the user to paste FTP passwords into chat – they go only into GitHub Secrets. Do NOT set a custom domain in GitHub Pages settings (the domain points to SEOHOST, not GitHub).
-- `noindex` stays in `<head>` (index + 5 audience pages) until the domain launch. Remove it on launch day.
+- `noindex` removed 28.10.2026 (launch: first outreach emails go out 29.10).
 - Link previews (og:image etc.) use absolute https://lunchee.is/ URLs on purpose – they start working once the domain is live. Images: assets/img/og-default.jpg, og-companies.jpg (generated with PIL; regenerate if the hero/campaign copy changes).
 - Email plan: info@lunchee.is (+ mikolaj@), Google Workspace recommended. Then switch footer + FormSubmit action to info@.
 - 26.10.2026: Christmas push – until 1 Dec the companies tab is first + default, other versions show a coral gift bar (auto-off from 2 Dec). New 'Healthy eating' tab (`/diet`, mint colour) for individuals who eat healthy (B2C: form asks how many + colour, 'Ask about price'; no prices on the page).
