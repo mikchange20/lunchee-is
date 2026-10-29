@@ -666,7 +666,8 @@ window.LUNCHEE_SHARED = {
     'specs.box.v': 'Lunchbox z pojemnikiem INOX 1,1 L · pojemnik 0,5 L z pokrywką · metalowa łyżka i widelec · kabel 230 V · kabel samochodowy 12/24 V · torba termiczna.',
     'specs.know': 'Dobrze wiedzieć',
     'specs.know.v': 'Czas podgrzewania zależy od posiłku i temperatury na zewnątrz – jedzenie z lodówki w zimny dzień potrzebuje trochę więcej czasu. Podczas podgrzewania zostaw otwarty zawór. Nigdy nie włączaj pustego lunchboxa.',
-    'foot.p': 'Oficjalny partner Lunchee na Islandii'
+    'foot.p': 'Oficjalny partner Lunchee na Islandii',
+    'foot.more': 'Lunchee dla innych branż →'
   },
   // Icelandic – same keys, after the native check
   is: {}

@@ -584,6 +584,10 @@ html:not(.gift-open) .snow-toggle { display: none; }
 .foot { background: var(--blue-deep); color: rgba(255, 255, 255, .75); text-align: center; padding: 8px var(--gutter) max(40px, env(safe-area-inset-bottom)); font-size: 14px; }
 .foot img { width: 150px; margin: 34px auto 14px; }
 .foot__contact { margin-top: 6px; }
+/* Focused landing page (direct link like /companies): one offer, no switching between industries */
+.foot__more { display: none; margin: 18px 0 4px; }
+.focus .foot__more { display: block; }
+.focus #who, .focus .menu__drop, .focus .pill--aud, .focus .xbar { display: none !important; }
 .foot a { color: var(--white); text-decoration: none; }
 .foot a:hover { text-decoration: underline; }
 

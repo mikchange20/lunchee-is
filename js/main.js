@@ -407,6 +407,11 @@
 
   const initial = fromUrl();
   if (initial) { aud = initial; setUrl(); }
+  // A direct link (/companies from an email) is a focused landing page: no industry tiles, menu or Christmas bar
+  document.documentElement.classList.toggle('focus', !!initial);
+  $('[data-home]').href = base;
+  // There is no gift tile to open there, so the Christmas snow is on from the start (the toggle can switch it off)
+  if (initial && XMAS_ON) document.documentElement.classList.add('gift-open');
 
   // Unwrap the gift tile: bow flies off, ribbon drops, confetti
   const unwrap = (el) => {
