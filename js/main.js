@@ -108,13 +108,22 @@
     setTimeout(() => $('.form [name="name"]').focus({ preventScroll: true }), 600);
   };
 
-  // Christmas campaign runs until 24 December: companies tab goes first and is the default,
-  // the other versions show a gift bar. From 25 December the page goes back to rentals first.
-  const daysToXmas = () => Math.ceil((new Date(new Date().getFullYear(), 11, 24, 23, 59) - new Date()) / 864e5);
-  const XMAS_ON = daysToXmas() > 0 && daysToXmas() <= 90;
+  // Christmas campaign – all dates live in LUNCHEE_CAMPAIGN (content.js). ?date=YYYY-MM-DD previews another day.
+  const CAMP = window.LUNCHEE_CAMPAIGN || {};
+  const pad = (n) => String(n).padStart(2, '0');
+  const now = new Date();
+  const qDate = new URLSearchParams(location.search).get('date');
+  const TODAY = /^\d{4}-\d{2}-\d{2}$/.test(qDate || '') ? qDate : `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  const inCampaign = !!CAMP.start && TODAY >= CAMP.start && !(CAMP.b2bFrom && TODAY >= CAMP.b2bFrom);
+  // Christmas content: Christmas hero, gift tile, snow, gift bar on the other versions
+  const XMAS_ON = inCampaign && !!CAMP.end && TODAY <= CAMP.end;
+  // Companies tab first and the default version
+  const COMPANIES_FIRST = inCampaign;
+  // Delivery before Christmas is promised only with a confirmed order-by date, and only until that day
+  const ORDER_BY = CAMP.orderBy && TODAY <= CAMP.orderBy ? CAMP.orderBy : null;
 
   let lang = 'en';
-  let aud = XMAS_ON ? 'companies' : 'rentals';
+  let aud = COMPANIES_FIRST ? 'companies' : 'rentals';
   const t = () => {
     if (!COPY.en[aud]) aud = 'rentals'; // never break the page if an audience has no copy (e.g. stale cached script)
     return Object.assign({}, COPY.en[aud], (COPY[lang] || {})[aud]);
@@ -197,7 +206,7 @@
     update();
   };
 
-  // Christmas campaign for companies – no delivery promise: the date is confirmed in the offer
+  // Christmas campaign for companies: the gift options (four colours) – price and ordering follow in #pricing
   const renderXmas = (x) => `
     <div class="xmas__inner">
       <div class="xmas__head reveal">
@@ -205,20 +214,46 @@
         <h2>${twoTone(x.h)}</h2>
         <p class="lead">${x.lead}</p>
       </div>
-      <div class="xmas__count reveal">${icon('gift')}<span>${x.note}</span><em>${x.greeting}</em></div>
-      <h3 class="xmas__sub reveal">${x.guideH}</h3>
       <ul class="guide">${x.guide.map(([f, h, p]) => `
         <li class="reveal"><span class="guide__tag">${icon('gift')}</span><img src="assets/img/${f}.jpg" alt="" width="900" height="900" loading="lazy"><b>${h}</b><p>${p}</p></li>`).join('')}</ul>
-      <div class="xmas__grid">
-        <div class="xmas__kit reveal"><h3 class="xmas__sub">${x.kitH}</h3>
-          <ul>${x.kit.map(([ic, h, p]) => `<li>${icon(ic)}<div><b>${h}</b><p>${p}</p></div></li>`).join('')}</ul></div>
-        <div class="xmas__plan reveal"><h3 class="xmas__sub">${x.planH}</h3>
-          <ol>${x.plan.map(([d, p]) => `<li><b>${d}</b><span>${p}</span></li>`).join('')}</ol>
-          <a class="btn btn--yellow" href="#contact" data-cta-xmas>${x.cta}</a>
-          <button type="button" class="snow-toggle" data-snow-toggle aria-pressed="true">${icon('flake')}<span>${x.snowOn}</span></button>
+      <div class="xmas__foot reveal">
+        <a class="btn btn--yellow" href="#pricing" data-track="xmas_see_prices">${x.cta}</a>
+        <em>${x.greeting}</em>
+        <button type="button" class="snow-toggle" data-snow-toggle aria-pressed="true">${icon('flake')}<span>${x.snowOn}</span></button>
+      </div>
+    </div>`;
+
+  // Companies: price per quantity (50+ highlighted) next to the three ordering steps
+  const renderPricing = (p) => `
+    <div class="pricing__inner">
+      <div class="pricing__head reveal"><h2>${p.h}</h2><p class="lead">${p.lead}</p></div>
+      <div class="pricing__grid">
+        <div class="price-card reveal">
+          <table class="price-table">
+            <thead><tr><th scope="col">${p.qty}</th><th scope="col">${p.unit}</th></tr></thead>
+            <tbody>${p.rows.map(([q, v], i) => {
+              const best = i === p.rows.length - 1;
+              return `<tr${best ? ' class="is-best"' : ''}><th scope="row">${q}${best ? ` <span class="price-best">${p.best}</span>` : ''}</th><td>${v}</td></tr>`;
+            }).join('')}</tbody>
+          </table>
+          <p class="price-note">${p.note}</p>
+          <a class="btn btn--block" href="#contact" data-to-form data-track="pricing_quote">${p.cta}</a>
+        </div>
+        <div class="order-steps reveal"><h3>${p.stepsH}</h3>
+          <ol>${p.steps.map(([h, s]) => `<li><b>${h}</b><span>${s}</span></li>`).join('')}</ol>
         </div>
       </div>
     </div>`;
+
+  const fmtDate = (iso) => new Intl.DateTimeFormat(lang === 'pl' ? 'pl-PL' : 'en-GB', { day: 'numeric', month: 'long' }).format(new Date(`${iso}T12:00`));
+  const xmasDelivery = (x) => (ORDER_BY ? x.orderBy.replace('{date}', fmtDate(ORDER_BY)) : x.delivery);
+
+  // Section order. Companies get a short path: benefits → gift options → pricing → form, then FAQ and the details.
+  const ORDER = {
+    default: ['why', 'how', 'xmas', 'pricing', 'benefits', 'product', 'steps', 'specs', 'trust', 'faq', 'contact'],
+    companiesXmas: ['why', 'xmas', 'pricing', 'contact', 'faq', 'trust', 'product', 'how', 'steps', 'specs', 'benefits'],
+    companies: ['why', 'product', 'pricing', 'contact', 'faq', 'trust', 'how', 'steps', 'specs', 'xmas', 'benefits']
+  };
 
   // Brand headline: first part blue, the rest white ("Twój czas na / ciepły posiłek")
   const twoTone = (txt) => {
@@ -256,13 +291,33 @@
     const c = t();
     const u = ui();
     const tile = $(`.tile[data-aud="${aud}"] b`);
+    const x = XMAS_ON ? c.xmas : null;
+
+    // Hero: companies have their own (Christmas offer during the campaign, year-round offer after it); the rest share one
+    const hero = (x && x.hero) || c.hero;
+    const sh = SHARED[lang] || {};
+    $$('.hero [data-i18n^="hero."]').forEach((el) => {
+      el.innerHTML = (hero && hero[el.dataset.i18n.slice(5)]) || sh[el.dataset.i18n] || originals.get(el);
+    });
+    const cta2 = $('[data-hero-cta2]');
+    cta2.setAttribute('href', hero ? hero.cta2To : '#steps');
+    cta2.dataset.track = hero ? 'hero_offer' : 'hero_how_it_works';
+    const price = $('[data-hero-price]');
+    price.hidden = !(hero && hero.price);
+    price.innerHTML = hero && hero.price ? `<b>${hero.price}</b><span>${hero.priceNote}</span>` : '';
+
+    const main = $('main');
+    (aud !== 'companies' ? ORDER.default : x ? ORDER.companiesXmas : ORDER.companies).forEach((id) => main.appendChild($(`#${id}`)));
+    $('#benefits').hidden = aud === 'companies'; // its points are already in the companies "why" block
+    const pr = $('[data-dyn="pricing"]');
+    pr.hidden = !c.pricing;
+    pr.innerHTML = c.pricing ? renderPricing(c.pricing) : '';
 
     $('[data-dyn="why"]').innerHTML = `${artSvg(aud)}
       <div class="why__head reveal">${audPill('pill--on-color')}<h2>${twoTone(c.why.h)}</h2><p class="lead">${c.why.lead}</p></div>
       <ul class="why__list">${c.why.items.map(([ic, h, p]) => `<li class="reveal">${icon(ic)}<h3>${h}</h3><p>${p}</p></li>`).join('')}</ul>`;
     $('[data-dyn="how"]').innerHTML = renderHow(c.how, u);
     const xm = $('[data-dyn="xmas"]');
-    const x = c.xmas;
     xm.hidden = !x;
     xm.innerHTML = x ? renderXmas(x) : '';
     const tag = $('[data-xmas-tag]');
@@ -281,10 +336,10 @@
     $('[data-xbar-text]').textContent = u.xbar;
     $('[data-xbar-link]').textContent = u.xbarLink;
     $('[data-dyn="faq"]').innerHTML = `<div class="faq__head reveal">${audPill()}<h2>${u.faq}</h2></div>
-      <div class="faq__list reveal">${c.faq.map(([q, a]) => `<details class="qa"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
+      <div class="faq__list reveal">${[...((x && x.faq) || []), ...c.faq].map(([q, a]) => `<details class="qa"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
     // Closing section: one shared B2B message; the individual (diet) version has its own
-    const fc = c.b2c ? c.form : { h: u.finalH, lead: u.finalP };
-    $('[data-dyn="cta"]').innerHTML = `${audPill('pill--on-dark')}<h2>${fc.h}</h2><p>${fc.lead}</p>${c.formNote ? `<p class="cta__note">${icon('gift')}${c.formNote}</p>` : ''}`;
+    const fc = c.b2c ? c.form : c.final || { h: u.finalH, lead: u.finalP };
+    $('[data-dyn="cta"]').innerHTML = `${audPill('pill--on-dark')}<h2>${fc.h}</h2><p>${fc.lead}</p>${x ? `<p class="cta__note">${icon('gift')}${xmasDelivery(x)}</p>` : ''}`;
     $$('[data-go-aud]').forEach((a) => (a.dataset.goAud === aud ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
 
     // Form: one B2B form; "Interested in" follows the chosen industry. Company is optional only for individuals (diet).
@@ -292,12 +347,27 @@
     const sel = form.segment;
     sel.innerHTML = AUDS.map((a) => { const b = $(`.tile[data-aud="${a}"] b`); return `<option value="${a}">${b ? b.textContent : a}</option>`; }).join('');
     sel.value = aud;
-    $$('[data-ui]', form).forEach((el) => { el.innerHTML = u[el.dataset.ui]; });
-    $$('[data-ui-ph]', form).forEach((el) => { el.placeholder = u[el.dataset.uiPh]; });
+    // Companies: quote request – company first, quantity as a required range, colours, no "Interested in"
+    const q = c.quote;
+    const fu = Object.assign({}, u, q);
+    $$('[data-ui]', form).forEach((el) => { el.innerHTML = fu[el.dataset.ui]; });
+    $$('[data-ui-ph]', form).forEach((el) => { el.placeholder = fu[el.dataset.uiPh]; });
+    form.classList.toggle('form--quote', !!q);
+    $('[data-f-segment]', form).hidden = !!q;
+    const qtyText = $('[data-f-qty] input', form), qtyRange = $('[data-qty-range]', form), colours = $('[data-f-colours]', form);
+    $('[data-f-qty]', form).hidden = qtyText.disabled = !!q;
+    $('[data-f-qty-range]', form).hidden = qtyRange.disabled = !q;
+    qtyRange.required = !!q;
+    if (q) {
+      const keep = qtyRange.value;
+      qtyRange.innerHTML = `<option value="">${q.qtyPh}</option>${q.qty.map((o) => `<option>${o}</option>`).join('')}`;
+      qtyRange.value = keep;
+    }
+    colours.hidden = colours.disabled = !q;
     form.company.required = !c.b2c;
     $('[data-company-opt]', form).hidden = !c.b2c;
     $('.form__head').hidden = !!c.b2c;
-    $('[data-submit]').textContent = c.b2c ? c.form.button : u.submit;
+    $('[data-submit]').textContent = c.b2c ? c.form.button : (q && q.submit) || u.submit;
 
     $$('[data-cta]').forEach((a) => {
       // Phones get a short label so the header button stays on one line
@@ -309,6 +379,11 @@
     // Unlisted audiences: no tile on the page, but their direct link (e.g. /stores) still works
     $$('.tile[data-unlisted]').forEach((el) => { el.hidden = el.dataset.aud !== aud; });
     document.title = `${c.title} | Lunchee.is`;
+    // Search engines: a direct link to a version (/companies) gets its own canonical address and description
+    if (initial) {
+      $('link[rel="canonical"]').href = `https://lunchee.is/${initial}`;
+      if (c.desc) $('meta[name="description"]').content = c.desc;
+    }
     document.documentElement.dataset.aud = aud;
     if (c.how.calc) bindCalc(c.how.calc);
     watchReveals();
@@ -371,7 +446,13 @@
     }
     if (scroll) scrollToTabs();
   };
-  if (XMAS_ON) {
+  // After the Christmas content ends the companies tile is a normal tile (no wrapping, no snow)
+  if (!XMAS_ON) {
+    const g = $('.tile--gift');
+    $$('.gift__ribbon, .gift__bow', g).forEach((el) => el.remove());
+    g.classList.remove('tile--gift');
+  }
+  if (COMPANIES_FIRST) {
     $('#tabs').prepend($('.tile[data-aud="companies"]'));
     $('#menu-uses').prepend($('[data-go-aud="companies"]').closest('li'));
   }
@@ -495,7 +576,9 @@
   form.landing_page.value = location.pathname + location.search;
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    form._subject.value = `Lunchee Iceland: new offer request (${form.segment.value})`;
+    form._subject.value = `Lunchee Iceland: new ${form.classList.contains('form--quote') ? 'quote' : 'offer'} request (${form.segment.value})`;
+    form.colours.value = $$('[data-f-colours] input:checked', form).map((el) => el.value).join(', ');
+    form.campaign.value = XMAS_ON && form.segment.value === 'companies' ? 'christmas' : '';
     const u = ui();
     const btn = $('[data-submit]');
     status.classList.remove('is-error', 'is-ok');
@@ -505,13 +588,13 @@
       const r = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
       const data = await r.json().catch(() => ({}));
       if (!r.ok || String(data.success) === 'false') throw new Error(data.message || r.status);
-      track('generate_lead', { segment: form.segment.value, cta: form.cta.value });
+      track('generate_lead', { segment: form.segment.value, cta: form.cta.value, source: form.source.value });
       const src = form.source.value, land = form.landing_page.value;
       form.reset();
       form.segment.value = aud;
       form.source.value = src; form.landing_page.value = land;
       status.classList.add('is-ok');
-      status.textContent = u.ok;
+      status.textContent = (t().quote || {}).ok || u.ok;
     } catch (err) {
       status.classList.add('is-error');
       status.textContent = u.err;

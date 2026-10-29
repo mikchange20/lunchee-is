@@ -190,6 +190,12 @@ h3 { font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--blue); }
 .hero__title .line--hot { color: var(--ink); font-weight: 700; }
 .hero__sub { margin-top: 20px; color: var(--ink); max-width: 44ch; font-size: 18px; }
 .hero__sub strong { font-weight: 700; color: var(--blue); }
+/* companies: price right under the offer */
+.hero__price { margin-top: 22px; display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; padding: 12px 18px; background: var(--white); border-radius: 16px; border-left: 5px solid var(--yellow); box-shadow: var(--shadow); }
+.hero__price[hidden] { display: none; }
+.hero__price b { font: 800 clamp(24px, 2.6vw, 30px)/1.1 var(--num); color: var(--blue); white-space: nowrap; }
+.hero__price span { font-size: 14px; font-weight: 600; color: var(--muted); }
+.hero__price + .hero__actions { margin-top: 20px; }
 .hero__actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
 .hero__photo { position: relative; border-radius: 28px; overflow: visible; aspect-ratio: 4 / 3.8; }
 .hero__photo > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; border-radius: 28px; box-shadow: 0 40px 70px -40px rgba(0, 40, 90, .55); }
@@ -420,14 +426,6 @@ html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white);
 .xmas h2 { font-size: clamp(30px, 4.6vw, 56px); max-width: 22ch; }
 .xmas h2 .tt-blue { color: var(--yellow); }
 .xmas .lead { color: rgba(255, 255, 255, .88); }
-.xmas__count {
-  justify-self: start; display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center;
-  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .25); border-radius: 22px; padding: 16px 22px;
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-}
-.xmas__count .ico { grid-row: span 2; width: 44px; height: 44px; stroke: var(--yellow); stroke-width: 1.8; }
-.xmas__count span { font-weight: 700; font-size: 17px; }
-.xmas__count em { font-style: normal; color: rgba(255, 255, 255, .75); font-size: 15px; }
 .xmas__sub { color: var(--white); font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; }
 
 .guide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: -12px; }
@@ -441,22 +439,10 @@ html[data-aud="drivers"] .tile[aria-pressed="true"] .ico { stroke: var(--white);
 .guide__tag .ico { width: 18px; height: 18px; stroke: var(--white); stroke-width: 2; }
 @media (min-width: 960px) { .guide { grid-template-columns: repeat(4, 1fr); gap: 16px; } .guide li { padding: 18px 18px 22px; } }
 
-.xmas__grid { display: grid; gap: 16px; }
-@media (min-width: 960px) { .xmas__grid { grid-template-columns: 1.2fr 1fr; gap: 20px; } }
-.xmas__kit, .xmas__plan { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .2); border-radius: 28px; padding: clamp(20px, 3vw, 32px); }
-.xmas__kit ul { margin-top: 16px; display: grid; gap: 14px; }
-.xmas__kit li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
-.xmas__kit .ico { width: 48px; height: 48px; padding: 11px; border-radius: 14px; background: var(--yellow); box-sizing: border-box; stroke-width: 2; }
-.xmas__kit b { font-size: 17px; }
-.xmas__kit p { margin-top: 2px; font-size: 15px; color: rgba(255, 255, 255, .82); }
-.xmas__plan ol { margin: 16px 0 22px; display: grid; gap: 0; counter-reset: plan; }
-.xmas__plan li { position: relative; padding: 0 0 18px 34px; counter-increment: plan; }
-.xmas__plan li::before { content: counter(plan); position: absolute; left: 0; top: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); color: var(--blue); font: 800 13px/24px var(--num); text-align: center; }
-.xmas__plan li:not(:last-child)::after { content: ""; position: absolute; left: 11px; top: 28px; bottom: 4px; width: 2px; background: rgba(255, 255, 255, .25); }
-.xmas__plan b { display: block; font: 800 16px/1.2 var(--num); color: var(--yellow); }
-.xmas__plan span { font-size: 15px; color: rgba(255, 255, 255, .88); }
+.xmas__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.xmas__foot em { font-style: normal; color: rgba(255, 255, 255, .75); font-size: 15px; }
 html:not(.gift-open) .snow-toggle { display: none; }
-.snow-toggle { display: inline-flex; align-items: center; gap: 6px; margin: 14px 0 0 12px; background: none; border: 0; color: rgba(255, 255, 255, .75); font: 600 13px/1 var(--font); cursor: pointer; }
+.snow-toggle { display: inline-flex; align-items: center; gap: 6px; margin: 0; background: none; border: 0; color: rgba(255, 255, 255, .75); font: 600 13px/1 var(--font); cursor: pointer; }
 .snow-toggle .ico { width: 16px; height: 16px; stroke: currentColor; }
 .snow-toggle[aria-pressed="false"] { opacity: .6; }
 
@@ -650,7 +636,7 @@ html[data-aud="companies"] .glow { --glow: rgba(255, 255, 255, .5); --glow-2: rg
   .lang button { padding: 6px 7px; font-size: 11.5px; }
 }
 
-/* Christmas gift bar – shown on the other versions until 1 December, opens the companies (gift) version */
+/* Christmas gift bar – shown on the other versions during the campaign (dates in content.js), opens the companies (gift) version */
 .xbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; padding: 10px var(--gutter); background: linear-gradient(135deg, var(--coral) 0%, #D9442A 100%); color: var(--white); font-size: 14px; line-height: 1.35; text-align: center; text-decoration: none; }
 .xbar[hidden] { display: none; }
 .xbar .ico { width: 20px; height: 20px; stroke: var(--white); flex: none; }
@@ -714,3 +700,37 @@ html[data-aud="companies"] .glow { --glow: rgba(255, 255, 255, .5); --glow-2: rg
 .form__status.is-ok { padding: 14px 16px; border-radius: 12px; background: #E8F5EA; }
 .cta__note { display: flex; gap: 10px; align-items: center; font-weight: 700; color: var(--yellow) !important; }
 .cta__note .ico { width: 22px; height: 22px; stroke: var(--yellow); }
+
+/* ---------- Companies: corporate pricing + how ordering works ---------- */
+.pricing { background: linear-gradient(180deg, var(--ice-1) 0%, var(--ice-2) 100%); padding: clamp(52px, 7vw, 92px) var(--gutter); }
+.pricing[hidden] { display: none; }
+.pricing__inner { max-width: var(--max); margin: 0 auto; }
+.pricing__grid { margin-top: clamp(24px, 3vw, 36px); display: grid; gap: 16px; align-items: start; }
+@media (min-width: 900px) { .pricing__grid { grid-template-columns: 1.15fr 1fr; gap: 24px; } }
+.price-card { background: var(--white); border-radius: 28px; padding: clamp(20px, 3vw, 32px); box-shadow: var(--shadow); }
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table thead th { padding: 0 14px 10px; text-align: left; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.price-table thead th:last-child, .price-table td { text-align: right; }
+.price-table tbody th, .price-table td { padding: 16px 14px; border-top: 1px solid var(--line); }
+.price-table tbody th { text-align: left; font-size: 17px; font-weight: 700; color: var(--ink); }
+.price-table td { font: 800 clamp(20px, 2.2vw, 24px)/1.1 var(--num); color: var(--blue); white-space: nowrap; }
+.price-table .is-best th, .price-table .is-best td { background: #FFF6D6; border-top-color: transparent; }
+.price-table .is-best th { border-radius: 14px 0 0 14px; }
+.price-table .is-best td { border-radius: 0 14px 14px 0; }
+.price-best { display: inline-block; margin-left: 6px; padding: 3px 9px; border-radius: 999px; background: var(--yellow); color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: .02em; vertical-align: 2px; white-space: nowrap; }
+.price-note { margin: 14px 0 18px; font-size: 14px; color: var(--muted); }
+.order-steps { background: var(--white); border-radius: 28px; padding: clamp(20px, 3vw, 32px); border: 1.5px solid #DCE6F2; }
+.order-steps h3 { font-size: clamp(20px, 2.2vw, 24px); font-weight: 800; }
+.order-steps ol { margin-top: 18px; counter-reset: plan; }
+.order-steps li { position: relative; padding: 0 0 20px 40px; counter-increment: plan; }
+.order-steps li:last-child { padding-bottom: 0; }
+.order-steps li::before { content: counter(plan); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--yellow); color: var(--blue); font: 800 14px/28px var(--num); text-align: center; }
+.order-steps li:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 32px; bottom: 6px; width: 2px; background: var(--line); }
+.order-steps b { display: block; font-size: 17px; color: var(--blue); }
+.order-steps span { font-size: 15px; color: var(--muted); }
+@media (max-width: 420px) { .price-table thead th, .price-table tbody th, .price-table td { padding-inline: 10px; } .price-best { display: table; margin: 6px 0 0; } }
+
+/* Companies quote form: company name first, colours as chips */
+.form--quote .f-company { order: -1; }
+.form .choice[hidden] { display: none; }
+.form .choice legend { margin-bottom: 8px; }

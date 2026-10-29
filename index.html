@@ -20,12 +20,14 @@
 <link rel="alternate" hreflang="x-default" href="https://lunchee.is/">
 <!-- Icelandic (hreflang="is") goes here once the IS translation is live -->
 <!-- GA4: paste the Google tag (gtag.js) with the Measurement ID here. Events are already sent: cta_click, segment_select, generate_lead -->
+<!-- The GitHub Pages test copy must not compete with lunchee.is in Google -->
+<script>if (/github\.io$/.test(location.hostname)) { var m = document.createElement('meta'); m.name = 'robots'; m.content = 'noindex'; document.head.appendChild(m); }</script>
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400..800&family=Outfit:wght@500..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261029-1">
+<link rel="stylesheet" href="css/style.css?v=20261029-2">
 </head>
 <body>
 
@@ -78,7 +80,9 @@
         <span class="line line--hot reveal-load" style="--d:2" data-i18n="hero.h2">Wherever work takes you.</span>
       </h1>
       <p class="hero__sub reveal-load" style="--d:3" data-i18n="hero.sub">Electric lunch boxes for people on the move. Plug into your car, truck or a regular power socket. <strong>Enjoy a warm meal without a microwave.</strong></p>
-      <div class="hero__actions reveal-load" style="--d:4"><a class="btn" href="#contact" data-to-form data-track="hero_business_pricing" data-i18n="hero.cta">Get business pricing</a><a class="btn btn--ghost" href="#steps" data-track="hero_how_it_works" data-i18n="hero.cta2">See how it works</a></div>
+      <!-- Price line: companies only (see "hero" in content.js) -->
+      <p class="hero__price reveal-load" style="--d:4" data-hero-price hidden></p>
+      <div class="hero__actions reveal-load" style="--d:4"><a class="btn" href="#contact" data-to-form data-track="hero_business_pricing" data-i18n="hero.cta">Get business pricing</a><a class="btn btn--ghost" href="#steps" data-track="hero_how_it_works" data-hero-cta2 data-i18n="hero.cta2">See how it works</a></div>
     </div>
     <figure class="hero__photo reveal-load" style="--d:2">
       <!-- Gimmie the Trip expedition photo -->
@@ -141,6 +145,9 @@
   <!-- 5b · CHRISTMAS GIFT CAMPAIGN (stores only, test version) -->
   <section class="xmas" id="xmas" data-dyn="xmas" hidden></section>
 
+  <!-- 5d · CORPORATE PRICING + how ordering works (companies only) -->
+  <section class="pricing" id="pricing" data-dyn="pricing" hidden></section>
+
   <!-- 5c · WHY LUNCHEE? (shared, 3 benefits) -->
   <section class="benefits section" id="benefits" aria-labelledby="benefits-h">
     <h2 id="benefits-h" class="reveal" data-i18n="ben.h">Why Lunchee?</h2>
@@ -197,7 +204,7 @@
   </section>
 
   <!-- 6c · SPECS -->
-  <section class="specs-wrap">
+  <section class="specs-wrap" id="specs">
       <details class="specs reveal">
         <summary data-i18n="specs.h">Specs</summary>
         <div class="specs__body">
@@ -239,6 +246,7 @@
           <li><b data-i18n="trust.2">Delivery in Iceland</b><span data-i18n="trust.2s">We confirm availability and the delivery date with your order.</span></li>
           <li><b data-i18n="trust.3">Warranty and complaints</b><span data-i18n="trust.3s">Handled by your local contact in Iceland – nothing to ship back to the manufacturer.</span></li>
           <li><b data-i18n="trust.4">Full documentation</b><span data-i18n="trust.4s">European brand with complete product documentation – available on request.</span></li>
+          <li><b data-i18n="trust.5">Orders of any size</b><span data-i18n="trust.5s">From a single unit to hundreds – mix colours in one order, one company invoice.</span></li>
         </ul>
         <!-- TODO: Icelandic seller details (company name, kennitala, address) once the ehf. is registered; then sales@lunchee.is -->
         <p class="trust__contact"><span data-i18n="trust.contact">Contact in Iceland:</span> <a href="mailto:contact@lunchee.is">contact@lunchee.is</a> · <a href="tel:+3547825558">+354 782 5558</a></p>
@@ -265,15 +273,26 @@
         <input type="hidden" name="source" value="">
         <input type="hidden" name="landing_page" value="">
         <input type="hidden" name="cta" value="">
+        <input type="hidden" name="campaign" value="">
+        <input type="hidden" name="colours" value="">
         <p class="form__hp"><label>Leave empty <input name="_honey" tabindex="-1" autocomplete="off"></label></p>
         <div class="form__grid">
-          <label><span data-ui="name">Name</span><input name="name" required autocomplete="name"></label>
-          <label><span><span data-ui="company">Company</span> <i class="opt" data-ui="optional" data-company-opt hidden>(optional)</i></span><input name="company" required autocomplete="organization"></label>
+          <label class="f-name"><span data-ui="name">Name</span><input name="name" required autocomplete="name"></label>
+          <label class="f-company"><span><span data-ui="company">Company</span> <i class="opt" data-ui="optional" data-company-opt hidden>(optional)</i></span><input name="company" required autocomplete="organization"></label>
           <label><span data-ui="email">Email</span><input name="email" type="email" required autocomplete="email"></label>
           <label><span><span data-ui="phone">Phone</span> <i class="opt" data-ui="optional">(optional)</i></span><input name="phone" type="tel" autocomplete="tel"></label>
-          <label><span data-ui="interested">Interested in</span><select name="segment" data-segment></select></label>
-          <label><span><span data-ui="quantity">Estimated quantity</span> <i class="opt" data-ui="optional">(optional)</i></span><input name="quantity" type="text" inputmode="numeric" data-ui-ph="quantityPh" placeholder="e.g. 20"></label>
+          <label data-f-segment><span data-ui="interested">Interested in</span><select name="segment" data-segment></select></label>
+          <label data-f-qty><span><span data-ui="quantity">Estimated quantity</span> <i class="opt" data-ui="optional">(optional)</i></span><input name="quantity" type="text" inputmode="numeric" data-ui-ph="quantityPh" placeholder="e.g. 20"></label>
+          <!-- Companies quote form: quantity as a range (required) + colours -->
+          <label data-f-qty-range hidden><span data-ui="quantity">Estimated quantity</span><select name="quantity" data-qty-range disabled></select></label>
         </div>
+        <fieldset class="choice form__full" data-f-colours hidden disabled>
+          <legend><span data-ui="colours">Preferred colours</span> <i class="opt" data-ui="optional">(optional)</i></legend>
+          <label><input type="checkbox" value="Pearl"><span>Pearl</span></label>
+          <label><input type="checkbox" value="Nature"><span>Nature</span></label>
+          <label><input type="checkbox" value="City"><span>City</span></label>
+          <label><input type="checkbox" value="Glamour"><span>Glamour</span></label>
+        </fieldset>
         <label class="form__full"><span><span data-ui="message">Message</span> <i class="opt" data-ui="optional">(optional)</i></span><textarea name="message" rows="3"></textarea></label>
         <p class="form__status" role="status" aria-live="polite"></p>
         <button type="submit" class="btn btn--block" data-submit>Get your business offer</button>
@@ -290,7 +309,7 @@
   <p class="foot__contact"><a href="mailto:contact@lunchee.is">contact@lunchee.is</a> · <a href="tel:+3547825558">+354 782 5558</a></p>
 </footer>
 
-<script src="js/content.js?v=20261029-1" defer></script>
-<script src="js/main.js?v=20261029-1" defer></script>
+<script src="js/content.js?v=20261029-2" defer></script>
+<script src="js/main.js?v=20261029-2" defer></script>
 </body>
 </html>

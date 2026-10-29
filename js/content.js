@@ -1,3 +1,13 @@
+// Christmas campaign dates – the only place to change them (YYYY-MM-DD, Iceland time).
+// Test any day with ?date=2026-12-26 in the address.
+window.LUNCHEE_CAMPAIGN = {
+  start: '2026-10-01',   // Christmas version starts: companies tab first + default, gift bar on the other versions
+  orderBy: null,         // last order day WITH delivery before Christmas, e.g. '2026-12-12'. Leave null until delivery is
+                         // confirmed – then the page never promises a date ("we'll confirm the delivery date with your offer")
+  end: '2026-12-24',     // last day of the Christmas content (Christmas hero, gift tile, snow, gift bar)
+  b2bFrom: '2026-12-25'  // from this day: year-round business offer on /companies and the page opens on car rentals again
+};
+
 // Copy for the 4 dynamic sections (4 Why, 5 How, 7 FAQ, 8 CTA + form), per language and audience.
 // EN is the source; PL is ready. IS goes into LUNCHEE_COPY.is with the same shape; any missing audience falls back to EN.
 window.LUNCHEE_COPY = {
@@ -18,6 +28,7 @@ window.LUNCHEE_COPY = {
       faq: 'Questions you probably have.',
       change: 'change',
       tagline: 'a hot meal anywhere you drive',
+      colours: 'Preferred colours',
       xbar: 'Planning Christmas gifts for your employees?',
       xbarLink: 'Ask for an offer'
     },
@@ -119,62 +130,103 @@ window.LUNCHEE_COPY = {
 
     companies: {
       title: 'Lunchee for companies in Iceland',
+      desc: 'Electric lunch boxes for companies in Iceland – a practical gift and everyday kit for your team. From 9,000 ISK per unit excl. VAT.',
+      // Year-round hero (after the Christmas campaign). During the campaign xmas.hero is used instead.
+      hero: {
+        tagline: 'Lunch boxes for companies in Iceland',
+        h1: 'Hot lunch for your team.',
+        h2: 'At the office, on site or on the road.',
+        sub: 'Electric lunch boxes for employees and crews. Plug into the car, the truck or a regular socket – a warm meal without a microwave.',
+        price: 'From 9,000&nbsp;ISK / unit',
+        priceNote: 'Excl. VAT · Orders of 50+ units',
+        cta: 'Request a corporate quote',
+        cta2: 'See pricing', cta2To: '#pricing'
+      },
+      // Shown only while the campaign runs (dates: LUNCHEE_CAMPAIGN below)
       xmas: {
+        hero: {
+          tagline: 'Christmas gifts for companies in Iceland',
+          h1: '13 Yule Lads.',
+          h2: 'One gift your team will actually use.',
+          sub: 'A practical Christmas gift for your employees. Warm meals at the office, on the road or at the job site.',
+          price: 'From 9,000&nbsp;ISK / unit',
+          priceNote: 'Excl. VAT · Orders of 50+ units',
+          cta: 'Request a Christmas gift quote',
+          cta2: 'See the gift options', cta2To: '#xmas'
+        },
         tag: 'Christmas gift idea',
         pill: 'Christmas campaign for companies',
-        h: '13 Yule Lads. | One gift the whole team will use.',
-        lead: 'Give every employee a hot lunch – at the desk, on site or on the road. A practical Christmas gift that stays in use all year, not in a drawer.',
-        note: 'From 9,000 ISK per unit, excl. VAT (án VSK). Send an enquiry – we’ll confirm the delivery date with your offer.',
+        h: 'A gift for everyone | on the team.',
+        lead: 'Four colours, the same lunch box. Everyone gets their favourite – mix colours in one order.',
         greeting: 'Gleðileg jól!',
-        guideH: 'A gift for everyone on the team',
         guide: [
           ['pearl', 'For the office', 'Lunch from home, warm at the desk – no queue for the microwave.'],
           ['nature', 'For the field crew', 'A hot lunch on site, from the van’s 12V socket.'],
           ['city', 'For the drivers', 'Plugs into 12V or 24V – lunch is hot when they park.'],
           ['glamour', 'For the one who has everything', 'Something they don’t have yet – and will use every day.']
         ],
-        kitH: 'What each employee gets',
-        kit: [
-          ['gift', 'A complete gift', 'Electric lunch box with a thermal bag – ready to give.'],
-          ['star', 'A brand you can trust', 'European brand with full documentation – not an anonymous gadget.'],
-          ['box', 'Their favourite colour', 'Pearl, Nature, City or Glamour – mix them in one order.']
+        cta: 'See prices',
+        // Delivery line next to the form: `orderBy` only once a delivery date is confirmed (LUNCHEE_CAMPAIGN.orderBy)
+        delivery: 'Planning Christmas gifts? Send an enquiry – we’ll confirm the delivery date with your offer.',
+        orderBy: 'Order by {date} for delivery before Christmas.',
+        faq: [
+          ['Will it arrive before Christmas?', 'Send your enquiry as early as you can – we’ll confirm the delivery date in the quote, before you order.']
         ],
-        planH: 'How it works',
-        plan: [
-          ['Send an enquiry', 'Tell us your team size and colours.'],
-          ['Within days', 'You get an offer with a confirmed delivery date.'],
-          ['Delivery', 'The gifts arrive at your office on the agreed date.']
-        ],
-        cta: 'Order gifts for your team',
         snowOn: 'Snow: on',
         snowOff: 'Snow: off'
       },
-      cta: 'Request a corporate offer',
-      formNote: 'Planning Christmas gifts? Send an enquiry – we’ll confirm the delivery date with your offer.',
+      cta: 'Request a quote',
       why: {
-        h: 'A gift your employees | will actually use.',
-        lead: 'A practical solution for employee gifts and teams working on the move.',
+        h: 'Not another gift card. | A hot lunch, every day.',
+        lead: 'A practical gift for employees – and everyday kit for teams on the move.',
         items: [
-          ['gift', 'A gift with a purpose.', 'Used every day, all year round – not another gift card.'],
-          ['truck', 'Made for the field team.', 'Runs on 12V and 24V in any company vehicle, and on 230V in the office.'],
-          ['star', 'Everyone picks a colour.', 'Mix four colours in one order – Pearl, Nature, City or Glamour.']
+          ['gift', 'Used every day.', 'At the desk, on site or on the road – all year round.'],
+          ['truck', 'Works in every vehicle.', '12V and 24V in company cars and trucks, 230V in the office.'],
+          ['box', 'Ready to give.', 'Lunch box, thermal bag and both cables in one box.']
         ]
+      },
+      pricing: {
+        h: 'Corporate pricing',
+        lead: 'Price per unit – thermal bag and both cables included.',
+        qty: 'Quantity', unit: 'Price per unit',
+        rows: [['1–9 units', '11,000&nbsp;ISK'], ['10–49 units', '10,000&nbsp;ISK'], ['50+ units', '9,000&nbsp;ISK']],
+        best: 'Best price',
+        note: 'All prices excl. VAT (án VSK).',
+        cta: 'Request a corporate quote',
+        stepsH: 'How ordering works',
+        steps: [
+          ['Send an enquiry', 'Tell us the quantity and colours.'],
+          ['Get your quote', 'Pricing and a confirmed delivery date by email.'],
+          ['Delivery', 'Delivered in Iceland on the agreed date, with a company invoice.']
+        ]
+      },
+      // Companies form: quote request (quantity range + colours instead of the free-text quantity)
+      quote: {
+        formH: 'Let’s find the right gift for your team.',
+        formP: 'Takes a minute – a quote request doesn’t commit you to anything.',
+        company: 'Company name', name: 'Contact name',
+        quantity: 'Estimated quantity', qtyPh: 'Choose…', qty: ['1–9', '10–49', '50–99', '100–199', '200+'],
+        colours: 'Preferred colours',
+        submit: 'Request my quote',
+        ok: 'Thanks! We’ve received your request and will be in touch.'
+      },
+      final: {
+        h: 'Get a quote <span class="accent">for your team.</span>',
+        lead: 'Tell us how many and which colours – we’ll reply by email with pricing and a confirmed delivery date.'
       },
       how: {
         h: 'Two ways to give it.',
         kind: 'cards',
         cards: [
-          { h: 'Christmas gift for the team', p: 'One order – every employee gets their own box in their favourite colour.',
-            mock: { title: 'Christmas gift order', type: 'list', rows: ['Pearl × 40', 'City × 50', 'Nature × 30'] } },
+          { h: 'A gift for the team', p: 'One order – every employee gets their own box in their favourite colour.',
+            mock: { title: 'Gift order', type: 'list', rows: ['Pearl × 40', 'City × 50', 'Nature × 30'] } },
           { h: 'Year-round benefit', p: 'Part of the welcome pack for new hires, or standard kit for crews in the field.',
             mock: { title: 'Welcome pack', type: 'check', rows: ['Laptop', 'Work jacket', 'Car-powered lunch box <em>+ thermal bag</em>'] } }
         ]
       },
       faq: [
         ['Can we order for the whole company?', 'Yes – from a few units to hundreds. Mix colours in one order.'],
-        ['Will it arrive before Christmas?', 'Send your enquiry as early as you can – we’ll confirm the delivery date in the offer, before you order.'],
         ['Is it a quality product?', 'Yes – a European brand with full documentation and a local contact in Iceland.'],
-        ['How much does it cost?', 'Per unit, excl. VAT (án VSK): 11,000 ISK for 1–9 units, 10,000 ISK for 10–49 units, 9,000 ISK from 50 units. Thermal bag included.'],
         ['Invoice for the company?', 'Yes, a regular company invoice.']
       ],    },
 
@@ -262,6 +314,7 @@ window.LUNCHEE_COPY = {
       faq: 'Pytania, które pewnie masz.',
       change: 'zmień',
       tagline: 'ciepły posiłek, gdziekolwiek jedziesz',
+      colours: 'Preferowane kolory',
       xbar: 'Planujesz prezenty świąteczne dla swoich pracowników?',
       xbarLink: 'Zapytaj o ofertę'
     },
@@ -363,62 +416,99 @@ window.LUNCHEE_COPY = {
 
     companies: {
       title: 'Lunchee dla firm na Islandii',
+      desc: 'Elektryczne lunchboxy dla firm na Islandii – praktyczny prezent i codzienne wyposażenie zespołu. Od 9 000 ISK za sztukę netto.',
+      hero: {
+        tagline: 'Lunchboxy dla firm na Islandii',
+        h1: 'Ciepły lunch dla Twojego zespołu.',
+        h2: 'W biurze, na budowie i w trasie.',
+        sub: 'Elektryczne lunchboxy dla pracowników i ekip. Podłączasz do auta, ciężarówki albo zwykłego gniazdka – ciepły posiłek bez mikrofalówki.',
+        price: 'Od 9&nbsp;000&nbsp;ISK / szt.',
+        priceNote: 'Netto, bez VAT · przy zamówieniu od 50 szt.',
+        cta: 'Poproś o wycenę dla firmy',
+        cta2: 'Zobacz cennik', cta2To: '#pricing'
+      },
       xmas: {
+        hero: {
+          tagline: 'Prezenty świąteczne dla firm na Islandii',
+          h1: '13 islandzkich Mikołajów.',
+          h2: 'Jeden prezent, którego zespół naprawdę użyje.',
+          sub: 'Praktyczny prezent świąteczny dla pracowników. Ciepły posiłek w biurze, w trasie albo na budowie.',
+          price: 'Od 9&nbsp;000&nbsp;ISK / szt.',
+          priceNote: 'Netto, bez VAT · przy zamówieniu od 50 szt.',
+          cta: 'Poproś o wycenę prezentów',
+          cta2: 'Zobacz opcje prezentu', cta2To: '#xmas'
+        },
         tag: 'Pomysł na prezent świąteczny',
         pill: 'Świąteczna kampania dla firm',
-        h: '13 islandzkich Mikołajów. | Jeden prezent, którego użyje cały zespół.',
-        lead: 'Daj każdemu pracownikowi ciepły lunch – przy biurku, na budowie albo w trasie. Praktyczny prezent na święta, który zostaje w użyciu przez cały rok, a nie w szufladzie.',
-        note: 'Od 9 000 ISK za sztukę netto (án VSK). Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
+        h: 'Prezent dla każdego | w zespole.',
+        lead: 'Cztery kolory, ten sam lunchbox. Każdy dostaje swój ulubiony – kolory mieszasz w jednym zamówieniu.',
         greeting: 'Gleðileg jól!',
-        guideH: 'Prezent dla każdego w zespole',
         guide: [
           ['pearl', 'Dla biura', 'Lunch z domu, ciepły przy biurku – bez kolejki do mikrofali.'],
           ['nature', 'Dla ekipy w terenie', 'Ciepły lunch na budowie, z gniazda 12V w busie.'],
           ['city', 'Dla kierowców', 'Podłączasz do 12V lub 24V – lunch jest ciepły, kiedy parkują.'],
           ['glamour', 'Dla kogoś, kto ma wszystko', 'Coś, czego jeszcze nie ma – i będzie używać codziennie.']
         ],
-        kitH: 'Co dostaje każdy pracownik',
-        kit: [
-          ['gift', 'Kompletny prezent', 'Elektryczny lunchbox z torbą termiczną – gotowy do wręczenia.'],
-          ['star', 'Marka, której można zaufać', 'Europejska marka z pełną dokumentacją – a nie anonimowy gadżet.'],
-          ['box', 'Ulubiony kolor', 'Pearl, Nature, City albo Glamour – kolory mieszasz w jednym zamówieniu.']
+        cta: 'Zobacz ceny',
+        delivery: 'Planujesz prezenty świąteczne? Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
+        orderBy: 'Zamów do {date}, a prezenty dotrą przed świętami.',
+        faq: [
+          ['Czy dotrze przed świętami?', 'Wyślij zapytanie jak najwcześniej – termin dostawy potwierdzimy w wycenie, zanim złożysz zamówienie.']
         ],
-        planH: 'Jak to działa',
-        plan: [
-          ['Wyślij zapytanie', 'Napisz, ile osób liczy zespół i jakie kolory.'],
-          ['W ciągu kilku dni', 'Dostajesz ofertę z potwierdzonym terminem dostawy.'],
-          ['Dostawa', 'Prezenty trafiają do Twojego biura w ustalonym terminie.']
-        ],
-        cta: 'Zamów prezenty dla zespołu',
         snowOn: 'Śnieg: wł.',
         snowOff: 'Śnieg: wył.'
       },
-      cta: 'Poproś o ofertę dla firmy',
-      formNote: 'Planujesz prezenty świąteczne? Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
+      cta: 'Poproś o wycenę',
       why: {
-        h: 'Prezent, z którego pracownicy | naprawdę będą korzystać.',
-        lead: 'Praktyczny pomysł na prezent dla pracowników i dla zespołów, które pracują w ruchu.',
+        h: 'Nie kolejna karta podarunkowa. | Ciepły lunch każdego dnia.',
+        lead: 'Praktyczny prezent dla pracowników – i codzienne wyposażenie dla zespołów w ruchu.',
         items: [
-          ['gift', 'Prezent z sensem.', 'Używany codziennie, przez cały rok – a nie kolejna karta podarunkowa.'],
-          ['truck', 'Stworzony dla ekip w terenie.', 'Działa na 12V i 24V w każdym aucie firmowym i na 230V w biurze.'],
-          ['star', 'Każdy wybiera kolor.', 'Cztery kolory w jednym zamówieniu – Pearl, Nature, City albo Glamour.']
+          ['gift', 'Używany codziennie.', 'Przy biurku, na budowie albo w trasie – przez cały rok.'],
+          ['truck', 'Działa w każdym aucie.', '12V i 24V w autach firmowych i ciężarówkach, 230V w biurze.'],
+          ['box', 'Gotowy do wręczenia.', 'Lunchbox, torba termiczna i oba kable w jednym pudełku.']
         ]
+      },
+      pricing: {
+        h: 'Cennik dla firm',
+        lead: 'Cena za sztukę – torba termiczna i oba kable w zestawie.',
+        qty: 'Ilość', unit: 'Cena za sztukę',
+        rows: [['1–9 szt.', '11&nbsp;000&nbsp;ISK'], ['10–49 szt.', '10&nbsp;000&nbsp;ISK'], ['50+ szt.', '9&nbsp;000&nbsp;ISK']],
+        best: 'Najlepsza cena',
+        note: 'Wszystkie ceny netto, bez VAT (án VSK).',
+        cta: 'Poproś o wycenę dla firmy',
+        stepsH: 'Jak wygląda zamówienie',
+        steps: [
+          ['Wyślij zapytanie', 'Napisz, ile sztuk i jakie kolory.'],
+          ['Dostajesz wycenę', 'Cena i potwierdzony termin dostawy mailem.'],
+          ['Dostawa', 'Dostarczamy na Islandii w ustalonym terminie, z fakturą dla firmy.']
+        ]
+      },
+      quote: {
+        formH: 'Dobierzmy prezent dla Twojego zespołu.',
+        formP: 'Zajmie minutę – zapytanie do niczego nie zobowiązuje.',
+        company: 'Nazwa firmy', name: 'Osoba kontaktowa',
+        quantity: 'Szacowana liczba sztuk', qtyPh: 'Wybierz…', qty: ['1–9', '10–49', '50–99', '100–199', '200+'],
+        colours: 'Preferowane kolory',
+        submit: 'Poproś o wycenę',
+        ok: 'Dziękujemy! Otrzymaliśmy Twoje zapytanie i wkrótce się odezwiemy.'
+      },
+      final: {
+        h: 'Wycena <span class="accent">dla Twojego zespołu.</span>',
+        lead: 'Napisz, ile sztuk i jakie kolory – odpiszemy mailem z ceną i potwierdzonym terminem dostawy.'
       },
       how: {
         h: 'Dwa sposoby, żeby go podarować.',
         kind: 'cards',
         cards: [
-          { h: 'Świąteczny prezent dla zespołu', p: 'Jedno zamówienie – każdy pracownik dostaje swój lunchbox w ulubionym kolorze.',
-            mock: { title: 'Zamówienie świąteczne', type: 'list', rows: ['Pearl × 40', 'City × 50', 'Nature × 30'] } },
+          { h: 'Prezent dla zespołu', p: 'Jedno zamówienie – każdy pracownik dostaje swój lunchbox w ulubionym kolorze.',
+            mock: { title: 'Zamówienie prezentów', type: 'list', rows: ['Pearl × 40', 'City × 50', 'Nature × 30'] } },
           { h: 'Benefit na cały rok', p: 'W pakiecie powitalnym dla nowych osób albo jako standardowe wyposażenie ekip w terenie.',
             mock: { title: 'Pakiet powitalny', type: 'check', rows: ['Laptop', 'Kurtka robocza', 'Elektryczny Lunchbox <em>+ torba termiczna</em>'] } }
         ]
       },
       faq: [
         ['Czy możemy zamówić dla całej firmy?', 'Tak – od kilku do kilkuset sztuk. Kolory można mieszać w jednym zamówieniu.'],
-        ['Czy dotrze przed świętami?', 'Wyślij zapytanie jak najwcześniej – termin dostawy potwierdzimy w ofercie, zanim złożysz zamówienie.'],
         ['Czy to dobry jakościowo produkt?', 'Tak – europejska marka z pełną dokumentacją i lokalnym kontaktem na Islandii.'],
-        ['Ile to kosztuje?', 'Za sztukę netto (án VSK): 11 000 ISK przy 1–9 szt., 10 000 ISK przy 10–49 szt., 9 000 ISK od 50 szt. Torba termiczna w zestawie.'],
         ['Faktura na firmę?', 'Tak, standardowa faktura dla firmy.']
       ],    },
 
@@ -548,6 +638,7 @@ window.LUNCHEE_SHARED = {
     'trust.2': 'Dostawa na Islandii', 'trust.2s': 'Dostępność i termin dostawy potwierdzamy przy zamówieniu.',
     'trust.3': 'Gwarancja i reklamacje', 'trust.3s': 'Obsługuje je Twój lokalny kontakt na Islandii – nic nie wysyłasz do producenta.',
     'trust.4': 'Pełna dokumentacja', 'trust.4s': 'Europejska marka z kompletną dokumentacją produktu – udostępniamy na życzenie.',
+    'trust.5': 'Zamówienia dowolnej wielkości', 'trust.5s': 'Od jednej sztuki do kilkuset – kolory mieszasz w jednym zamówieniu, jedna faktura dla firmy.',
     'trust.contact': 'Kontakt na Islandii:',
     'product.alt': 'Otwarty lunchbox z ciepłym posiłkiem',
     'kit.bag': 'Torba termiczna',
