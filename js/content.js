@@ -15,7 +15,7 @@ window.LUNCHEE_COPY = {
     ui: {
       sending: 'Sending...',
       ok: 'Thank you – your request has been sent. We’ll reply by email with pricing and availability.',
-      err: 'Something went wrong. Please try again or email us.',
+      err: 'Something went wrong. Please try again or email us at <a href="mailto:contact@lunchee.is">contact@lunchee.is</a>.',
       name: 'Name', company: 'Company', email: 'Email', phone: 'Phone', message: 'Message',
       optional: '(optional)', interested: 'Interested in', quantity: 'Estimated quantity', quantityPh: 'e.g. 20',
       formH: 'Let’s find the right Lunchee solution for your business.',
@@ -28,7 +28,7 @@ window.LUNCHEE_COPY = {
       faq: 'Questions you probably have.',
       change: 'change',
       tagline: 'a hot meal anywhere you drive',
-      colours: 'Preferred colours',
+      colours: 'How many of each colour?', coloursHint: 'Not sure yet? Leave it empty – we can decide together.',
       xbar: 'Planning Christmas gifts for your employees?',
       xbarLink: 'Ask for an offer'
     },
@@ -206,7 +206,7 @@ window.LUNCHEE_COPY = {
         formP: 'Takes a minute – a quote request doesn’t commit you to anything.',
         company: 'Company name', name: 'Contact name',
         quantity: 'Estimated quantity', qtyPh: 'Choose…', qty: ['1–9', '10–49', '50–99', '100–199', '200+'],
-        colours: 'Preferred colours',
+        colours: 'How many of each colour?', coloursHint: 'Not sure yet? Leave it empty – we can decide together.',
         submit: 'Request my quote',
         ok: 'Thanks! We’ve received your request and will be in touch.'
       },
@@ -301,7 +301,7 @@ window.LUNCHEE_COPY = {
     ui: {
       sending: 'Wysyłanie...',
       ok: 'Dziękujemy – zapytanie zostało wysłane. Odpiszemy mailem z ceną i dostępnością.',
-      err: 'Coś poszło nie tak. Spróbuj ponownie albo napisz do nas maila.',
+      err: 'Coś poszło nie tak. Spróbuj ponownie albo napisz na <a href="mailto:contact@lunchee.is">contact@lunchee.is</a>.',
       name: 'Imię i nazwisko', company: 'Firma', email: 'E-mail', phone: 'Telefon', message: 'Wiadomość',
       optional: '(opcjonalnie)', interested: 'Czego dotyczy', quantity: 'Szacowana liczba sztuk', quantityPh: 'np. 20',
       formH: 'Dobierzmy Lunchee do Twojej firmy.',
@@ -314,7 +314,7 @@ window.LUNCHEE_COPY = {
       faq: 'Pytania, które pewnie masz.',
       change: 'zmień',
       tagline: 'ciepły posiłek, gdziekolwiek jedziesz',
-      colours: 'Preferowane kolory',
+      colours: 'Ile sztuk w każdym kolorze?', coloursHint: 'Jeszcze nie wiesz? Zostaw puste – ustalimy razem.',
       xbar: 'Planujesz prezenty świąteczne dla swoich pracowników?',
       xbarLink: 'Zapytaj o ofertę'
     },
@@ -488,7 +488,7 @@ window.LUNCHEE_COPY = {
         formP: 'Zajmie minutę – zapytanie do niczego nie zobowiązuje.',
         company: 'Nazwa firmy', name: 'Osoba kontaktowa',
         quantity: 'Szacowana liczba sztuk', qtyPh: 'Wybierz…', qty: ['1–9', '10–49', '50–99', '100–199', '200+'],
-        colours: 'Preferowane kolory',
+        colours: 'Ile sztuk w każdym kolorze?', coloursHint: 'Jeszcze nie wiesz? Zostaw puste – ustalimy razem.',
         submit: 'Poproś o wycenę',
         ok: 'Dziękujemy! Otrzymaliśmy Twoje zapytanie i wkrótce się odezwiemy.'
       },

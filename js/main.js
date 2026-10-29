@@ -578,7 +578,7 @@
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // ---------- Form (FormSubmit; GitHub Pages has no form backend. First request triggers an activation email.) ----------
+  // ---------- Form (api/send.php on lunchee.is; FormSubmit as a backup – its first request triggers an activation email) ----------
   const form = $('.form');
   const status = $('.form__status');
   // Where the enquiry came from: campaign tags (utm_*) or the referring site, plus the first page they landed on
@@ -588,20 +588,34 @@
   try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (err) { /* bad referrer */ }
   form.source.value = utm || (ref && ref !== location.hostname ? ref : 'direct');
   form.landing_page.value = location.pathname + location.search;
+  // Companies: units per colour ("City × 30, Pearl × 20"); the total also picks the matching quantity range
+  const colourInputs = $$('[data-colour]', form);
+  const colourList = () => colourInputs.filter((el) => Number(el.value) > 0).map((el) => `${el.dataset.colour} × ${Number(el.value)}`).join(', ');
+  colourInputs.forEach((el) => el.addEventListener('input', () => {
+    const total = colourInputs.reduce((n, i) => n + (Math.max(0, Number(i.value)) || 0), 0);
+    const range = $('[data-qty-range]', form);
+    if (!total || range.disabled) return;
+    const opt = [...range.options].find((o) => { const [lo, hi] = o.value.split(/[–+-]/).map(Number); return o.value && total >= lo && (!hi || total <= hi); });
+    if (opt) range.value = opt.value;
+  }));
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     form._subject.value = `Lunchee Iceland: new ${form.classList.contains('form--quote') ? 'quote' : 'offer'} request (${form.segment.value})`;
-    form.colours.value = $$('[data-f-colours] input:checked', form).map((el) => el.value).join(', ');
+    form.colours.value = colourList();
     form.campaign.value = XMAS_ON && form.segment.value === 'companies' ? 'christmas' : '';
     const u = ui();
     const btn = $('[data-submit]');
     status.classList.remove('is-error', 'is-ok');
     status.textContent = u.sending;
     btn.disabled = true;
-    try {
-      const r = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+    // Our own mail script on lunchee.is first; FormSubmit as a backup (and on the GitHub Pages copy, which has no PHP)
+    const post = async (url) => {
+      const r = await fetch(url, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
       const data = await r.json().catch(() => ({}));
-      if (!r.ok || String(data.success) === 'false') throw new Error(data.message || r.status);
+      if (!r.ok || String(data.success) !== 'true') throw new Error(data.message || r.status);
+    };
+    try {
+      try { await post(`${base}api/send.php`); } catch (err) { await post(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/')); }
       track('generate_lead', { segment: form.segment.value, cta: form.cta.value, source: form.source.value });
       const src = form.source.value, land = form.landing_page.value;
       form.reset();
@@ -611,7 +625,7 @@
       status.textContent = (t().quote || {}).ok || u.ok;
     } catch (err) {
       status.classList.add('is-error');
-      status.textContent = u.err;
+      status.innerHTML = u.err;
     } finally {
       btn.disabled = false;
     }

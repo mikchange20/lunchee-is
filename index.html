@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400..800&family=Outfit:wght@500..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261029-4">
+<link rel="stylesheet" href="css/style.css?v=20261029-5">
 </head>
 <body>
 
@@ -288,11 +288,14 @@
           <label data-f-qty-range hidden><span data-ui="quantity">Estimated quantity</span><select name="quantity" data-qty-range disabled></select></label>
         </div>
         <fieldset class="choice form__full" data-f-colours hidden disabled>
-          <legend><span data-ui="colours">Preferred colours</span> <i class="opt" data-ui="optional">(optional)</i></legend>
-          <label><input type="checkbox" value="Pearl"><span>Pearl</span></label>
-          <label><input type="checkbox" value="Nature"><span>Nature</span></label>
-          <label><input type="checkbox" value="City"><span>City</span></label>
-          <label><input type="checkbox" value="Glamour"><span>Glamour</span></label>
+          <legend><span data-ui="colours">How many of each colour?</span> <i class="opt" data-ui="optional">(optional)</i></legend>
+          <p class="colour-qty__hint" data-ui="coloursHint">Not sure yet? Leave it empty – we can decide together.</p>
+          <div class="colour-qty">
+            <label><i class="dot dot--pearl" aria-hidden="true"></i><b>Pearl</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="Pearl" aria-label="Pearl"></label>
+            <label><i class="dot dot--nature" aria-hidden="true"></i><b>Nature</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="Nature" aria-label="Nature"></label>
+            <label><i class="dot dot--city" aria-hidden="true"></i><b>City</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="City" aria-label="City"></label>
+            <label><i class="dot dot--glamour" aria-hidden="true"></i><b>Glamour</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="Glamour" aria-label="Glamour"></label>
+          </div>
         </fieldset>
         <label class="form__full"><span><span data-ui="message">Message</span> <i class="opt" data-ui="optional">(optional)</i></span><textarea name="message" rows="3"></textarea></label>
         <p class="form__status" role="status" aria-live="polite"></p>
@@ -311,7 +314,7 @@
   <p class="foot__contact"><a href="mailto:contact@lunchee.is">contact@lunchee.is</a> · <a href="tel:+3547825558">+354 782 5558</a></p>
 </footer>
 
-<script src="js/content.js?v=20261029-4" defer></script>
-<script src="js/main.js?v=20261029-4" defer></script>
+<script src="js/content.js?v=20261029-5" defer></script>
+<script src="js/main.js?v=20261029-5" defer></script>
 </body>
 </html>

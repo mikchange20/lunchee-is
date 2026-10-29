@@ -740,4 +740,11 @@ html[data-aud="companies"] .glow { --glow: rgba(255, 255, 255, .5); --glow-2: rg
 /* Companies quote form: company name first, colours as chips */
 .form--quote .f-company { order: -1; }
 .form .choice[hidden] { display: none; }
-.form .choice legend { margin-bottom: 8px; }
+.form .choice legend { margin-bottom: 4px; }
+.colour-qty__hint { width: 100%; font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+.colour-qty { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (min-width: 720px) { .colour-qty { grid-template-columns: repeat(4, 1fr); } }
+.form .colour-qty label { display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 12px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--cream); cursor: text; }
+.colour-qty b { flex: 1; font-size: 15px; color: var(--blue); }
+.choice .colour-qty input { position: static; opacity: 1; pointer-events: auto; }
+.form .colour-qty input { width: 64px !important; flex: none; text-align: center; padding: 8px 6px !important; }
