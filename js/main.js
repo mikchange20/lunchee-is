@@ -380,8 +380,8 @@
     $$('.tile[data-unlisted]').forEach((el) => { el.hidden = el.dataset.aud !== aud; });
     document.title = `${c.title} | Lunchee.is`;
     // Search engines: a direct link to a version (/companies) gets its own canonical address and description
-    if (initial) {
-      $('link[rel="canonical"]').href = `https://lunchee.is/${initial}`;
+    if (initial || USES) {
+      $('link[rel="canonical"]').href = `https://lunchee.is/${initial || 'uses'}`;
       if (c.desc) $('meta[name="description"]').content = c.desc;
     }
     document.documentElement.dataset.aud = aud;
@@ -390,7 +390,7 @@
   };
 
   // ---------- Routing: /rentals, /crews, /drivers, /stores (stub folders redirect to ?for=…) ----------
-  const base = location.pathname.replace(/[^/]*$/, '').replace(new RegExp(`/(${AUDS.join('|')})/$`), '/');
+  const base = location.pathname.replace(/[^/]*$/, '').replace(new RegExp(`/(${AUDS.join('|')}|uses)/$`), '/');
   const fromUrl = () => {
     const q = new URLSearchParams(location.search).get('for');
     const h = location.hash.slice(1);
@@ -406,12 +406,21 @@
   };
 
   const initial = fromUrl();
+  // /uses: the page with all industries (tiles + menu). During the Christmas campaign the home page is the companies offer.
+  const USES = !initial && [new URLSearchParams(location.search).get('for'), location.pathname.split('/').filter(Boolean).pop()].includes('uses');
   if (initial) { aud = initial; setUrl(); }
-  // A direct link (/companies from an email) is a focused landing page: no industry tiles, menu or Christmas bar
-  document.documentElement.classList.toggle('focus', !!initial);
-  $('[data-home]').href = base;
+  if (USES) {
+    aud = 'rentals';
+    const params = new URLSearchParams(location.search);
+    params.delete('for');
+    history.replaceState(null, '', `${base}uses${params.toString() ? `?${params}` : ''}${location.hash}`);
+  }
+  // Focused landing page (a direct link like /companies, or the home page during the campaign): one offer, no industry tiles, menu or Christmas bar
+  const FOCUS = !!initial || (COMPANIES_FIRST && !USES);
+  document.documentElement.classList.toggle('focus', FOCUS);
+  $$('[data-uses]').forEach((a) => { a.href = `${base}uses`; });
   // There is no gift tile to open there, so the Christmas snow is on from the start (the toggle can switch it off)
-  if (initial && XMAS_ON) document.documentElement.classList.add('gift-open');
+  if (FOCUS && XMAS_ON) document.documentElement.classList.add('gift-open');
 
   // Unwrap the gift tile: bow flies off, ribbon drops, confetti
   const unwrap = (el) => {
@@ -457,7 +466,7 @@
     $$('.gift__ribbon, .gift__bow', g).forEach((el) => el.remove());
     g.classList.remove('tile--gift');
   }
-  if (COMPANIES_FIRST) {
+  if (COMPANIES_FIRST && !USES) {
     $('#tabs').prepend($('.tile[data-aud="companies"]'));
     $('#menu-uses').prepend($('[data-go-aud="companies"]').closest('li'));
   }

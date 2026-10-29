@@ -610,6 +610,7 @@ window.LUNCHEE_SHARED = {
     'who.stores.short': 'Sklepy',
     'who.diet.short': 'Dieta',
     'nav.uses': 'Zastosowania',
+    'nav.other': 'Inne zastosowania',
     'nav.how': 'Jak to działa',
     'nav.product': 'Produkt',
     'nav.faq': 'Pytania',

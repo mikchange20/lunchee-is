@@ -587,6 +587,9 @@ html:not(.gift-open) .snow-toggle { display: none; }
 /* Focused landing page (direct link like /companies): one offer, no switching between industries */
 .foot__more { display: none; margin: 18px 0 4px; }
 .focus .foot__more { display: block; }
+.menu__other { display: none; }
+.focus .menu__other { display: inline; }
+@media (max-width: 1099px) { .focus .menu__other { display: block; } }
 .focus #who, .focus .menu__drop, .focus .pill--aud, .focus .xbar { display: none !important; }
 .foot a { color: var(--white); text-decoration: none; }
 .foot a:hover { text-decoration: underline; }
