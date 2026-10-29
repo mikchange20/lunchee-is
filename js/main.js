@@ -108,10 +108,10 @@
     setTimeout(() => $('.form [name="name"]').focus({ preventScroll: true }), 600);
   };
 
-  // Christmas campaign runs until the last order day (1 December): companies tab goes first and is the default,
-  // the other versions show a gift bar. From 2 December the page goes back to rentals first.
-  const daysToOrder = () => Math.ceil((new Date(new Date().getFullYear(), 11, 1, 23, 59) - new Date()) / 864e5);
-  const XMAS_ON = daysToOrder() > 0 && daysToOrder() <= 70;
+  // Christmas campaign runs until 24 December: companies tab goes first and is the default,
+  // the other versions show a gift bar. From 25 December the page goes back to rentals first.
+  const daysToXmas = () => Math.ceil((new Date(new Date().getFullYear(), 11, 24, 23, 59) - new Date()) / 864e5);
+  const XMAS_ON = daysToXmas() > 0 && daysToXmas() <= 90;
 
   let lang = 'en';
   let aud = XMAS_ON ? 'companies' : 'rentals';
