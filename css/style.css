@@ -743,8 +743,14 @@ html[data-aud="companies"] .glow { --glow: rgba(255, 255, 255, .5); --glow-2: rg
 .form .choice legend { margin-bottom: 4px; }
 .colour-qty__hint { width: 100%; font-size: 14px; color: var(--muted); margin: 0 0 8px; }
 .colour-qty { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-@media (min-width: 720px) { .colour-qty { grid-template-columns: repeat(4, 1fr); } }
-.form .colour-qty label { display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 12px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--cream); cursor: text; }
-.colour-qty b { flex: 1; font-size: 15px; color: var(--blue); }
-.choice .colour-qty input { position: static; opacity: 1; pointer-events: auto; }
-.form .colour-qty input { width: 64px !important; flex: none; text-align: center; padding: 8px 6px !important; }
+.colour-opt { display: flex; align-items: center; gap: 6px; min-height: 52px; padding: 4px 6px 4px 4px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--cream); transition: background .15s, border-color .15s, box-shadow .15s; }
+.colour-opt.is-on { background: var(--white); border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+.form .colour-opt__pick { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 8px; cursor: pointer; border-radius: 10px; }
+.colour-opt__pick b { flex: 1; font-size: 15px; color: var(--blue); }
+.colour-opt__pick .dot { width: 20px; height: 20px; flex: none; }
+.colour-opt__pick:has(input:focus-visible) { outline: 3px solid var(--yellow); outline-offset: 1px; }
+.colour-opt__tick { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--white); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; background: var(--blue); border-radius: 50%; padding: 2px; display: none; }
+.colour-opt.is-on .colour-opt__tick { display: block; }
+.choice .colour-qty input[type="number"] { position: static; opacity: 1; pointer-events: auto; }
+.form .colour-qty input[type="number"] { width: 64px !important; flex: none; text-align: center; padding: 8px 6px !important; }
+.form .colour-qty input[type="number"][hidden] { display: none; }

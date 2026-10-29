@@ -588,16 +588,31 @@
   try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (err) { /* bad referrer */ }
   form.source.value = utm || (ref && ref !== location.hostname ? ref : 'direct');
   form.landing_page.value = location.pathname + location.search;
-  // Companies: units per colour ("City × 30, Pearl × 20"); the total also picks the matching quantity range
+  // Companies: pick colours, then units for each ("City × 30, Pearl × 20"); the total also picks the matching quantity range
   const colourInputs = $$('[data-colour]', form);
-  const colourList = () => colourInputs.filter((el) => Number(el.value) > 0).map((el) => `${el.dataset.colour} × ${Number(el.value)}`).join(', ');
-  colourInputs.forEach((el) => el.addEventListener('input', () => {
-    const total = colourInputs.reduce((n, i) => n + (Math.max(0, Number(i.value)) || 0), 0);
+  const picked = (el) => !el.hidden;
+  const colourList = () => colourInputs.filter(picked).map((el) => (Number(el.value) > 0 ? `${el.dataset.colour} × ${Number(el.value)}` : el.dataset.colour)).join(', ');
+  const syncRange = () => {
+    const total = colourInputs.filter(picked).reduce((n, i) => n + (Math.max(0, Number(i.value)) || 0), 0);
     const range = $('[data-qty-range]', form);
     if (!total || range.disabled) return;
     const opt = [...range.options].find((o) => { const [lo, hi] = o.value.split(/[–+-]/).map(Number); return o.value && total >= lo && (!hi || total <= hi); });
     if (opt) range.value = opt.value;
+  };
+  const showColour = (box, on) => {
+    const qty = $('[data-colour]', box);
+    box.classList.toggle('is-on', on);
+    qty.hidden = !on;
+    if (!on) qty.value = '';
+  };
+  $$('[data-colour-pick]', form).forEach((cb) => cb.addEventListener('change', () => {
+    const box = cb.closest('.colour-opt');
+    showColour(box, cb.checked);
+    if (cb.checked) $('[data-colour]', box).focus();
+    syncRange();
   }));
+  colourInputs.forEach((el) => el.addEventListener('input', syncRange));
+  form.addEventListener('reset', () => setTimeout(() => $$('.colour-opt', form).forEach((b) => showColour(b, false))));
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     form._subject.value = `Lunchee Iceland: new ${form.classList.contains('form--quote') ? 'quote' : 'offer'} request (${form.segment.value})`;

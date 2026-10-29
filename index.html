@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400..800&family=Outfit:wght@500..800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261029-5">
+<link rel="stylesheet" href="css/style.css?v=20261029-6">
 </head>
 <body>
 
@@ -288,13 +288,13 @@
           <label data-f-qty-range hidden><span data-ui="quantity">Estimated quantity</span><select name="quantity" data-qty-range disabled></select></label>
         </div>
         <fieldset class="choice form__full" data-f-colours hidden disabled>
-          <legend><span data-ui="colours">How many of each colour?</span> <i class="opt" data-ui="optional">(optional)</i></legend>
-          <p class="colour-qty__hint" data-ui="coloursHint">Not sure yet? Leave it empty – we can decide together.</p>
+          <legend><span data-ui="colours">Colours and quantities</span> <i class="opt" data-ui="optional">(optional)</i></legend>
+          <p class="colour-qty__hint" data-ui="coloursHint">Tap the colours you like and add how many. Not sure yet? Skip it – we can decide together.</p>
           <div class="colour-qty">
-            <label><i class="dot dot--pearl" aria-hidden="true"></i><b>Pearl</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="Pearl" aria-label="Pearl"></label>
-            <label><i class="dot dot--nature" aria-hidden="true"></i><b>Nature</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="Nature" aria-label="Nature"></label>
-            <label><i class="dot dot--city" aria-hidden="true"></i><b>City</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="City" aria-label="City"></label>
-            <label><i class="dot dot--glamour" aria-hidden="true"></i><b>Glamour</b><input type="number" min="0" max="9999" inputmode="numeric" placeholder="0" data-colour="Glamour" aria-label="Glamour"></label>
+            <div class="colour-opt"><label class="colour-opt__pick"><input type="checkbox" value="Pearl" data-colour-pick><i class="dot dot--pearl" aria-hidden="true"></i><b>Pearl</b><svg class="colour-opt__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></label><input type="number" min="1" max="9999" inputmode="numeric" placeholder="pcs" data-colour="Pearl" aria-label="Pearl – units" hidden></div>
+            <div class="colour-opt"><label class="colour-opt__pick"><input type="checkbox" value="Nature" data-colour-pick><i class="dot dot--nature" aria-hidden="true"></i><b>Nature</b><svg class="colour-opt__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></label><input type="number" min="1" max="9999" inputmode="numeric" placeholder="pcs" data-colour="Nature" aria-label="Nature – units" hidden></div>
+            <div class="colour-opt"><label class="colour-opt__pick"><input type="checkbox" value="City" data-colour-pick><i class="dot dot--city" aria-hidden="true"></i><b>City</b><svg class="colour-opt__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></label><input type="number" min="1" max="9999" inputmode="numeric" placeholder="pcs" data-colour="City" aria-label="City – units" hidden></div>
+            <div class="colour-opt"><label class="colour-opt__pick"><input type="checkbox" value="Glamour" data-colour-pick><i class="dot dot--glamour" aria-hidden="true"></i><b>Glamour</b><svg class="colour-opt__tick" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></label><input type="number" min="1" max="9999" inputmode="numeric" placeholder="pcs" data-colour="Glamour" aria-label="Glamour – units" hidden></div>
           </div>
         </fieldset>
         <label class="form__full"><span><span data-ui="message">Message</span> <i class="opt" data-ui="optional">(optional)</i></span><textarea name="message" rows="3"></textarea></label>
@@ -314,7 +314,7 @@
   <p class="foot__contact"><a href="mailto:contact@lunchee.is">contact@lunchee.is</a> · <a href="tel:+3547825558">+354 782 5558</a></p>
 </footer>
 
-<script src="js/content.js?v=20261029-5" defer></script>
-<script src="js/main.js?v=20261029-5" defer></script>
+<script src="js/content.js?v=20261029-6" defer></script>
+<script src="js/main.js?v=20261029-6" defer></script>
 </body>
 </html>

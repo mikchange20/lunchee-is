@@ -28,7 +28,7 @@ window.LUNCHEE_COPY = {
       faq: 'Questions you probably have.',
       change: 'change',
       tagline: 'a hot meal anywhere you drive',
-      colours: 'How many of each colour?', coloursHint: 'Not sure yet? Leave it empty – we can decide together.',
+      colours: 'Colours and quantities', coloursHint: 'Tap the colours you like and add how many. Not sure yet? Skip it – we can decide together.',
       xbar: 'Planning Christmas gifts for your employees?',
       xbarLink: 'Ask for an offer'
     },
@@ -206,7 +206,7 @@ window.LUNCHEE_COPY = {
         formP: 'Takes a minute – a quote request doesn’t commit you to anything.',
         company: 'Company name', name: 'Contact name',
         quantity: 'Estimated quantity', qtyPh: 'Choose…', qty: ['1–9', '10–49', '50–99', '100–199', '200+'],
-        colours: 'How many of each colour?', coloursHint: 'Not sure yet? Leave it empty – we can decide together.',
+        colours: 'Colours and quantities', coloursHint: 'Tap the colours you like and add how many. Not sure yet? Skip it – we can decide together.',
         submit: 'Request my quote',
         ok: 'Thanks! We’ve received your request and will be in touch.'
       },
@@ -314,7 +314,7 @@ window.LUNCHEE_COPY = {
       faq: 'Pytania, które pewnie masz.',
       change: 'zmień',
       tagline: 'ciepły posiłek, gdziekolwiek jedziesz',
-      colours: 'Ile sztuk w każdym kolorze?', coloursHint: 'Jeszcze nie wiesz? Zostaw puste – ustalimy razem.',
+      colours: 'Kolory i liczba sztuk', coloursHint: 'Kliknij wybrane kolory i wpisz, ile sztuk. Jeszcze nie wiesz? Pomiń – ustalimy razem.',
       xbar: 'Planujesz prezenty świąteczne dla swoich pracowników?',
       xbarLink: 'Zapytaj o ofertę'
     },
@@ -488,7 +488,7 @@ window.LUNCHEE_COPY = {
         formP: 'Zajmie minutę – zapytanie do niczego nie zobowiązuje.',
         company: 'Nazwa firmy', name: 'Osoba kontaktowa',
         quantity: 'Szacowana liczba sztuk', qtyPh: 'Wybierz…', qty: ['1–9', '10–49', '50–99', '100–199', '200+'],
-        colours: 'Ile sztuk w każdym kolorze?', coloursHint: 'Jeszcze nie wiesz? Zostaw puste – ustalimy razem.',
+        colours: 'Kolory i liczba sztuk', coloursHint: 'Kliknij wybrane kolory i wpisz, ile sztuk. Jeszcze nie wiesz? Pomiń – ustalimy razem.',
         submit: 'Poproś o wycenę',
         ok: 'Dziękujemy! Otrzymaliśmy Twoje zapytanie i wkrótce się odezwiemy.'
       },
