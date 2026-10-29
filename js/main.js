@@ -18,6 +18,7 @@
     star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
     flame: '<path d="M12 21a7 7 0 0 0 7-7c0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-2-2-4-3 3-5 5-5 8a7 7 0 0 0 7 7z"/><path d="M12 21a3 3 0 0 0 3-3c0-2-1.5-3-3-5-1.5 2-3 3-3 5a3 3 0 0 0 3 3z"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+    calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
     truck: '<path d="M2 6h12v10H2zM14 9h4l4 4v3h-8z"/><circle cx="6" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/>',
     plug: '<path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v4"/>',
     wallet: '<path d="M4 7h15a1 1 0 0 1 1 1v11H5a1 1 0 0 1-1-1z"/><path d="M4 7l11-3v3"/><path d="M15 12h5v4h-5a2 2 0 0 1 0-4z"/>',
@@ -121,6 +122,9 @@
   const COMPANIES_FIRST = inCampaign;
   // Delivery before Christmas is promised only with a confirmed order-by date, and only until that day
   const ORDER_BY = CAMP.orderBy && TODAY <= CAMP.orderBy ? CAMP.orderBy : null;
+  // Christmas order deadline: until closeBy "orders close on …", after it "missed it? ask anyway" (until the campaign ends)
+  const CLOSE_BY = CAMP.closeBy || null;
+  const CLOSED = !!CLOSE_BY && TODAY > CLOSE_BY;
 
   let lang = 'en';
   let aud = COMPANIES_FIRST ? 'companies' : 'rentals';
@@ -246,7 +250,16 @@
     </div>`;
 
   const fmtDate = (iso) => new Intl.DateTimeFormat(lang === 'pl' ? 'pl-PL' : 'en-GB', { day: 'numeric', month: 'long' }).format(new Date(`${iso}T12:00`));
-  const xmasDelivery = (x) => (ORDER_BY ? x.orderBy.replace('{date}', fmtDate(ORDER_BY)) : x.delivery);
+  // [headline, small print] for the order deadline, or null without one
+  const xmasDeadline = (x) => {
+    const d = CLOSE_BY && (CLOSED ? x.late : x.closeBy);
+    return d ? d.map((s) => s.replace('{date}', fmtDate(CLOSE_BY))) : null;
+  };
+  const xmasDelivery = (x) => {
+    if (ORDER_BY) return x.orderBy.replace('{date}', fmtDate(ORDER_BY));
+    const d = xmasDeadline(x);
+    return d ? `${d[0]}${CLOSED ? '' : '.'} ${d[1]}` : x.delivery;
+  };
 
   // Section order. Companies get a short path: benefits → gift options → pricing → form, then FAQ and the details.
   const ORDER = {
@@ -305,6 +318,10 @@
     const price = $('[data-hero-price]');
     price.hidden = !(hero && hero.price);
     price.innerHTML = hero && hero.price ? `<b>${hero.price}</b><span>${hero.priceNote}</span>` : '';
+    const deadline = $('[data-hero-deadline]');
+    const dl = x && !ORDER_BY ? xmasDeadline(x) : null;
+    deadline.hidden = !dl;
+    deadline.innerHTML = dl ? `${icon('calendar')}<span><b>${dl[0]}</b><small>${dl[1]}</small></span>` : '';
 
     const main = $('main');
     (aud !== 'companies' ? ORDER.default : x ? ORDER.companiesXmas : ORDER.companies).forEach((id) => main.appendChild($(`#${id}`)));

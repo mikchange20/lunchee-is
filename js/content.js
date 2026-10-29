@@ -2,6 +2,7 @@
 // Test any day with ?date=2026-12-26 in the address.
 window.LUNCHEE_CAMPAIGN = {
   start: '2026-10-01',   // Christmas version starts: companies tab first + default, gift bar on the other versions
+  closeBy: '2026-11-16', // Christmas orders close (same date as the outreach emails). After it: "Missed it? Ask anyway"
   orderBy: null,         // last order day WITH delivery before Christmas, e.g. '2026-12-12'. Leave null until delivery is
                          // confirmed – then the page never promises a date ("we'll confirm the delivery date with your offer")
   end: '2026-12-24',     // last day of the Christmas content (Christmas hero, gift tile, snow, gift bar)
@@ -169,6 +170,9 @@ window.LUNCHEE_COPY = {
         // Delivery line next to the form: `orderBy` only once a delivery date is confirmed (LUNCHEE_CAMPAIGN.orderBy)
         delivery: 'Planning Christmas gifts? Send an enquiry – we’ll confirm the delivery date with your offer.',
         orderBy: 'Order by {date} for delivery before Christmas.',
+        // Order deadline (LUNCHEE_CAMPAIGN.closeBy) – an order date, not a delivery promise; after it the "late" line shows
+        closeBy: ['Christmas orders close on {date}', 'Delivery date confirmed with your quote.'],
+        late: ['Missed {date}?', 'Ask anyway – we’ll check if we can still deliver before Christmas.'],
         faq: [
           ['Will it arrive before Christmas?', 'Send your enquiry as early as you can – we’ll confirm the delivery date in the quote, before you order.']
         ],
@@ -452,6 +456,8 @@ window.LUNCHEE_COPY = {
         cta: 'Zobacz ceny',
         delivery: 'Planujesz prezenty świąteczne? Wyślij zapytanie – termin dostawy potwierdzimy w ofercie.',
         orderBy: 'Zamów do {date}, a prezenty dotrą przed świętami.',
+        closeBy: ['Zamówienia świąteczne przyjmujemy do {date}', 'Termin dostawy potwierdzimy w wycenie.'],
+        late: ['Minął {date}?', 'Zapytaj mimo to – sprawdzimy, czy zdążymy dostarczyć przed świętami.'],
         faq: [
           ['Czy dotrze przed świętami?', 'Wyślij zapytanie jak najwcześniej – termin dostawy potwierdzimy w wycenie, zanim złożysz zamówienie.']
         ],
