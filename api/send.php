@@ -39,4 +39,29 @@ $headers = implode("\r\n", [
   'Content-Transfer-Encoding: 8bit'
 ]);
 $sent = mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', implode("\n", $lines), $headers, '-f' . $to);
-$sent ? $out(true) : $out(false, 'mail() failed', 500);
+
+// Copy into the Lunchee panel (panel URL + key in config.php, written by the deploy from a GitHub secret).
+// The email above is the main channel; a panel error never fails the form.
+$saved = false;
+$cfgFile = __DIR__ . '/config.php';
+if (is_file($cfgFile) && function_exists('curl_init')) {
+  $cfg = include $cfgFile;
+  if (!empty($cfg['panel_url']) && !empty($cfg['lead_key'])) {
+    $fields = ['name', 'company', 'email', 'phone', 'segment', 'quantity', 'colours', 'message', 'source', 'cta', 'campaign', 'landing_page'];
+    $payload = [];
+    foreach ($fields as $f) $payload[$f] = $clean($_POST[$f] ?? '');
+    $ch = curl_init($cfg['panel_url']);
+    curl_setopt_array($ch, [
+      CURLOPT_POST => true,
+      CURLOPT_POSTFIELDS => json_encode($payload),
+      CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'x-lunchee-key: ' . $cfg['lead_key']],
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_TIMEOUT => 6,
+    ]);
+    curl_exec($ch);
+    $saved = curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
+    curl_close($ch);
+  }
+}
+if ($sent || $saved) $out(true);
+$out(false, 'mail() failed', 500);

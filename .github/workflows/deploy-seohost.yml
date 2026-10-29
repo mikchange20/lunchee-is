@@ -32,6 +32,13 @@ jobs:
         if: env.FTP_SERVER != ''
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+      - name: Panel connection for the form (api/config.php, not in the repo)
+        if: env.FTP_SERVER != ''
+        env:
+          LEAD_KEY: ${{ secrets.LEAD_KEY }}
+        run: |
+          if [ -n "$LEAD_KEY" ]; then printf "<?php\nreturn ['panel_url' => 'https://lunchee-panel.vercel.app/api/zapytanie', 'lead_key' => '%s'];\n" "$LEAD_KEY" > api/config.php; fi
+
       - name: Upload to SEOHOST
         if: env.FTP_SERVER != ''
         env:
