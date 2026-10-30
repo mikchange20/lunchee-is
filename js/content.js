@@ -604,7 +604,7 @@ window.LUNCHEE_SHARED = {
     'hero.sub': 'Elektryczne lunchboxy dla ludzi w ruchu. Podłączasz do auta, ciężarówki albo zwykłego gniazdka. <strong>Ciepły posiłek bez mikrofalówki.</strong>',
     'hero.alt': 'Podróżniczka je ciepły posiłek z lunchboxa obok samochodu na islandzkiej drodze',
     'stats.1': 'auto lub gniazdko',
-    'stats.2': 'zwykle tyle trwa podgrzewanie',
+    'stats.2': 'podgrzewanie do 60°C',
     'stats.3b': 'Torba termiczna',
     'stats.3': 'w zestawie',
     'stats.4b': 'Marka z UE',
