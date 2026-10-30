@@ -29,8 +29,9 @@ Add `?lang=pl` for Polish. The form sends a hidden `segment` field.
 
 ## Do NOT put on the page (brief 20.10.2026)
 
-Warranty length · accessories availability · delivery dates before stock is in Iceland · prices/supplier ·
+Accessories availability · delivery dates before stock is in Iceland · prices/supplier ·
 logo printing/branding (not offered). Allowed for companies: "Order by 1 December, we'll deliver before Christmas."
+Warranty: "2-year warranty, faulty unit replaced 1:1 in Iceland" is allowed since 30.10.2026 (Comtel gives Lunchee 30 months, 1:1 replacement).
 
 ## Connecting lunchee.is
 

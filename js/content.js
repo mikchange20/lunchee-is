@@ -70,7 +70,7 @@ window.LUNCHEE_COPY = {
         ['Will it work in my cars?', 'Yes – 12V in cars and campers, 24V in vans. The 230V cable for the hotel or cabin is in the box.'],
         ['Can customers handle it?', 'Pack it, plug it in, drive. Easier than a Wi-Fi hotspot.'],
         ['How does delivery work?', 'We deliver in Iceland and confirm availability and the date with your order.'],
-        ['What about warranty?', 'Warranty and complaints are handled by your local contact in Iceland.']
+        ['What about warranty?', '2-year warranty. If a unit is faulty, we replace it 1:1 here in Iceland – nothing to ship back to the manufacturer.']
       ],    },
 
     crews: {
@@ -195,7 +195,7 @@ window.LUNCHEE_COPY = {
         qty: 'Quantity', unit: 'Price per unit',
         rows: [['1–9 units', '11,000&nbsp;ISK'], ['10–49 units', '10,000&nbsp;ISK'], ['50+ units', '9,000&nbsp;ISK']],
         best: 'Best price',
-        note: 'All prices excl. VAT (án VSK).',
+        note: 'All prices excl. VAT (án VSK). 2-year warranty included.',
         cta: 'Request a corporate quote',
         stepsH: 'How ordering works',
         steps: [
@@ -231,7 +231,8 @@ window.LUNCHEE_COPY = {
       faq: [
         ['Can we order for the whole company?', 'Yes – from a few units to hundreds. Mix colours in one order.'],
         ['Is it a quality product?', 'Yes – a European brand with full documentation and a local contact in Iceland.'],
-        ['Invoice for the company?', 'Yes, a regular company invoice.']
+        ['Invoice for the company?', 'Yes, a regular company invoice.'],
+        ['What about warranty?', '2-year warranty. If a unit is faulty, we replace it 1:1 here in Iceland – nothing to ship back to the manufacturer.']
       ],    },
 
     diet: {
@@ -359,7 +360,7 @@ window.LUNCHEE_COPY = {
         ['Czy zadziała w moich autach?', 'Tak – 12V w osobówkach i kamperach, 24V w busach. Kabel 230V do hotelu czy domku jest w zestawie.'],
         ['Czy klienci sobie poradzą?', 'Spakuj, podłącz, jedź. Prościej niż hotspot Wi-Fi.'],
         ['Jak wygląda dostawa?', 'Dostarczamy na Islandii – dostępność i termin potwierdzamy przy zamówieniu.'],
-        ['A gwarancja?', 'Gwarancję i reklamacje obsługuje Twój lokalny kontakt na Islandii.']
+        ['A gwarancja?', '2 lata gwarancji. Wadliwy egzemplarz wymieniamy 1:1 na miejscu, na Islandii – nic nie wysyłasz do producenta.']
       ],    },
 
     crews: {
@@ -480,7 +481,7 @@ window.LUNCHEE_COPY = {
         qty: 'Ilość', unit: 'Cena za sztukę',
         rows: [['1–9 szt.', '11&nbsp;000&nbsp;ISK'], ['10–49 szt.', '10&nbsp;000&nbsp;ISK'], ['50+ szt.', '9&nbsp;000&nbsp;ISK']],
         best: 'Najlepsza cena',
-        note: 'Wszystkie ceny netto, bez VAT (án VSK).',
+        note: 'Wszystkie ceny netto, bez VAT (án VSK). 2 lata gwarancji w cenie.',
         cta: 'Poproś o wycenę dla firmy',
         stepsH: 'Jak wygląda zamówienie',
         steps: [
@@ -515,7 +516,8 @@ window.LUNCHEE_COPY = {
       faq: [
         ['Czy możemy zamówić dla całej firmy?', 'Tak – od kilku do kilkuset sztuk. Kolory można mieszać w jednym zamówieniu.'],
         ['Czy to dobry jakościowo produkt?', 'Tak – europejska marka z pełną dokumentacją i lokalnym kontaktem na Islandii.'],
-        ['Faktura na firmę?', 'Tak, standardowa faktura dla firmy.']
+        ['Faktura na firmę?', 'Tak, standardowa faktura dla firmy.'],
+        ['A gwarancja?', '2 lata gwarancji. Wadliwy egzemplarz wymieniamy 1:1 na miejscu, na Islandii – nic nie wysyłasz do producenta.']
       ],    },
 
     diet: {
@@ -643,7 +645,7 @@ window.LUNCHEE_SHARED = {
     'trust.p': 'Elektryczne lunchboxy od uznanej europejskiej marki AGD, dostępne dla firm na Islandii.',
     'trust.1': 'Lokalny partner na Islandii', 'trust.1s': 'Zamówienie, faktura i obsługa na miejscu – bez importowania na własną rękę.',
     'trust.2': 'Dostawa na Islandii', 'trust.2s': 'Dostępność i termin dostawy potwierdzamy przy zamówieniu.',
-    'trust.3': 'Gwarancja i reklamacje', 'trust.3s': 'Obsługuje je Twój lokalny kontakt na Islandii – nic nie wysyłasz do producenta.',
+    'trust.3': '2 lata gwarancji', 'trust.3s': 'Wadliwy egzemplarz wymieniamy 1:1 na Islandii – nic nie wysyłasz do producenta.',
     'trust.4': 'Pełna dokumentacja', 'trust.4s': 'Europejska marka z kompletną dokumentacją produktu – udostępniamy na życzenie.',
     'trust.5': 'Zamówienia dowolnej wielkości', 'trust.5s': 'Od jednej sztuki do kilkuset – kolory mieszasz w jednym zamówieniu, jedna faktura dla firmy.',
     'trust.contact': 'Kontakt na Islandii:',
